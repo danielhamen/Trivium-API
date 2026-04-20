@@ -10,6 +10,12 @@ class CategoryOut(BaseModel):
     children: list["CategoryOut"] = Field(default_factory=list)
 
 
+class CategoryRefOut(BaseModel):
+    id: str
+    title: str
+    description: str | None = None
+
+
 class OptionOut(BaseModel):
     text: str
     is_correct: bool
@@ -22,7 +28,7 @@ class HintOut(BaseModel):
 class QuestionOut(BaseModel):
     id: str
     question: str
-    categories: list[CategoryOut]
+    categories: list[CategoryRefOut]
     difficulty: Difficulty
     correct_answer: str
     options: list[OptionOut] = Field(default_factory=list)
@@ -33,7 +39,7 @@ class QuestionOut(BaseModel):
 class QuestionPublicOut(BaseModel):
     id: str
     question: str
-    categories: list[CategoryOut]
+    categories: list[CategoryRefOut]
     difficulty: Difficulty
     options: list[OptionOut] = Field(default_factory=list)
     hints: list[HintOut] = Field(default_factory=list)
