@@ -1,6 +1,6 @@
 import json
-import os
 import random
+from pathlib import Path
 from dataclasses import dataclass, field
 from typing import Any, Optional
 
@@ -13,13 +13,14 @@ class DataRepository:
     questions: list[Question] = field(default_factory=list)
 
     def fetch(self) -> "DataRepository":
-        category_path = os.path.join("data", "categories.json")
-        question_path = os.path.join("data", "questions.json")
+        data_dir = Path(__file__).resolve().parent.parent / "data"
+        category_path = data_dir / "categories.json"
+        question_path = data_dir / "questions.json"
 
-        with open(category_path, "r", encoding="utf-8") as file:
+        with category_path.open("r", encoding="utf-8") as file:
             category_obj = json.load(file)
 
-        with open(question_path, "r", encoding="utf-8") as file:
+        with question_path.open("r", encoding="utf-8") as file:
             question_obj = json.load(file)
 
         if not isinstance(category_obj, list):

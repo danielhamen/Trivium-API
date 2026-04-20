@@ -70,6 +70,9 @@ def test_get_questions(client):
         assert "id" in question
         assert "question" in question
         assert "correct_answer" not in question
+        assert isinstance(question["categories"], list)
+        if question["categories"]:
+            assert "children" not in question["categories"][0]
 
 
 def test_get_all_questions_with_answers(client):
@@ -81,6 +84,9 @@ def test_get_all_questions_with_answers(client):
     if body:
         question = body[0]
         assert "correct_answer" in question
+        assert isinstance(question["categories"], list)
+        if question["categories"]:
+            assert "children" not in question["categories"][0]
 
 
 def test_get_question_by_id(client, repository):
