@@ -76,17 +76,6 @@ def get_categories(
     return categories
 
 
-@app.get("/categories/{category_id}", response_model=CategoryOut)
-def get_category(
-    category_id: str,
-    repository: Annotated[DataRepository, Depends(get_repo)] = None,
-):
-    try:
-        return repository.get_category_by_id(category_id)
-    except ValueError as exc:
-        raise HTTPException(status_code=404, detail=str(exc)) from exc
-
-
 @app.get("/categories/search", response_model=list[CategoryOut])
 def search_categories(
     q: str = Query(..., min_length=1),
@@ -99,6 +88,17 @@ def search_categories(
         exact=exact,
         case_sensitive=case_sensitive,
     )
+
+
+@app.get("/categories/{category_id}", response_model=CategoryOut)
+def get_category(
+    category_id: str,
+    repository: Annotated[DataRepository, Depends(get_repo)] = None,
+):
+    try:
+        return repository.get_category_by_id(category_id)
+    except ValueError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
 
 
 @app.get("/questions", response_model=list[QuestionPublicOut])
@@ -136,32 +136,6 @@ def get_all_questions_with_answers(
     repository: Annotated[DataRepository, Depends(get_repo)] = None,
 ):
     return repository.get_all_questions()[offset : offset + limit]
-
-
-@app.get("/questions/{question_id}", response_model=QuestionOut)
-def get_question(
-    question_id: str,
-    repository: Annotated[DataRepository, Depends(get_repo)] = None,
-):
-    question = repository.try_get_question_by_id(question_id)
-    if question is None:
-        raise HTTPException(
-            status_code=404, detail=f"question not found: {question_id}"
-        )
-    return question
-
-
-@app.get("/questions/{question_id}/public", response_model=QuestionPublicOut)
-def get_public_question(
-    question_id: str,
-    repository: Annotated[DataRepository, Depends(get_repo)] = None,
-):
-    question = repository.try_get_question_by_id(question_id)
-    if question is None:
-        raise HTTPException(
-            status_code=404, detail=f"question not found: {question_id}"
-        )
-    return to_public_question(question)
 
 
 @app.get("/questions/search", response_model=list[QuestionPublicOut])
@@ -244,3 +218,29 @@ def get_random_questions(
 
     chosen = random.sample(questions, count)
     return [to_public_question(q) for q in chosen]
+
+
+@app.get("/questions/{question_id}", response_model=QuestionOut)
+def get_question(
+    question_id: str,
+    repository: Annotated[DataRepository, Depends(get_repo)] = None,
+):
+    question = repository.try_get_question_by_id(question_id)
+    if question is None:
+        raise HTTPException(
+            status_code=404, detail=f"question not found: {question_id}"
+        )
+    return question
+
+
+@app.get("/questions/{question_id}/public", response_model=QuestionPublicOut)
+def get_public_question(
+    question_id: str,
+    repository: Annotated[DataRepository, Depends(get_repo)] = None,
+):
+    question = repository.try_get_question_by_id(question_id)
+    if question is None:
+        raise HTTPException(
+            status_code=404, detail=f"question not found: {question_id}"
+        )
+    return to_public_question(question)
