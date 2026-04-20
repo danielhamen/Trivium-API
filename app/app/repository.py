@@ -1,0 +1,331 @@
+import json
+import os
+import random
+from dataclasses import dataclass, field
+from typing import Any, Optional
+
+from app.models import Category, Difficulty, Hint, Option, Question
+
+
+@dataclass
+class DataRepository:
+    categories: list[Category] = field(default_factory=list)
+    questions: list[Question] = field(default_factory=list)
+
+    def fetch(self) -> "DataRepository":
+        category_path = os.path.join("data", "categories.json")
+        question_path = os.path.join("data", "questions.json")
+
+        with open(category_path, "r", encoding="utf-8") as file:
+            category_obj = json.load(file)
+
+        with open(question_path, "r", encoding="utf-8") as file:
+            question_obj = json.load(file)
+
+        if not isinstance(category_obj, list):
+            raise TypeError("categories.json must contain a list")
+        if not isinstance(question_obj, list):
+            raise TypeError("questions.json must contain a list")
+
+        self.categories = [self._parse_category(x) for x in category_obj]
+        self.questions = [self._parse_question(x) for x in question_obj]
+        return self
+
+    def _parse_category(self, obj: Any) -> Category:
+        if not isinstance(obj, dict):
+            raise TypeError("category must be an object")
+        if "id" not in obj:
+            raise ValueError("category missing `id`")
+        if "title" not in obj:
+            raise ValueError("category missing `title`")
+
+        id_ = obj["id"]
+        title = obj["title"]
+        description = obj.get("description")
+        children_raw = obj.get("children", [])
+
+        if not isinstance(id_, str):
+            raise TypeError("category id must be a string")
+        if not isinstance(title, str):
+            raise TypeError("category title must be a string")
+        if description is not None and not isinstance(description, str):
+            raise TypeError("category description must be a string or null")
+        if not isinstance(children_raw, list):
+            raise TypeError("category children must be a list")
+
+        children = [self._parse_category(x) for x in children_raw]
+
+        return Category(
+            id=id_,
+            title=title,
+            description=description,
+            children=children,
+        )
+
+    def _parse_question(self, obj: Any) -> Question:
+        if not isinstance(obj, dict):
+            raise TypeError("question must be an object")
+
+        required = ["id", "categories", "question", "difficulty", "correct_answer"]
+        for key in required:
+            if key not in obj:
+                raise ValueError(f"question missing `{key}`")
+
+        id_ = obj["id"]
+        question_text = obj["question"]
+        difficulty = Difficulty.parse(obj["difficulty"])
+        correct_answer = obj["correct_answer"]
+
+        if not isinstance(id_, str):
+            raise TypeError("question id must be a string")
+        if not isinstance(question_text, str):
+            raise TypeError("question text must be a string")
+        if not isinstance(correct_answer, str):
+            raise TypeError("correct_answer must be a string")
+
+        category_ids = obj["categories"]
+        if not isinstance(category_ids, list) or not all(
+            isinstance(x, str) for x in category_ids
+        ):
+            raise TypeError("question categories must be a list of strings")
+        categories = [self.get_category_by_id(x) for x in category_ids]
+
+        explanation = obj.get("explanation")
+        if explanation is not None and not isinstance(explanation, str):
+            raise TypeError("explanation must be a string or null")
+
+        options_raw = obj.get("options", [])
+        if not isinstance(options_raw, list):
+            raise TypeError("options must be a list")
+        options = [self._parse_option(x) for x in options_raw]
+        if len(options) > 8:
+            raise ValueError("MAX 8 options allowed")
+
+        hints_raw = obj.get("hints", [])
+        if not isinstance(hints_raw, list) or not all(
+            isinstance(x, str) for x in hints_raw
+        ):
+            raise TypeError("hints must be a list of strings")
+        hints = [self._parse_hint(x) for x in hints_raw]
+        if len(hints) > 3:
+            raise ValueError("MAX 3 hints allowed")
+
+        return Question(
+            id=id_,
+            question=question_text,
+            categories=categories,
+            difficulty=difficulty,
+            correct_answer=correct_answer,
+            options=options,
+            hints=hints,
+            explanation=explanation,
+        )
+
+    def _parse_hint(self, obj: Any) -> Hint:
+        if not isinstance(obj, str):
+            raise TypeError("hint must be a string")
+        return Hint(text=obj)
+
+    def _parse_option(self, obj: Any) -> Option:
+        if not isinstance(obj, dict):
+            raise TypeError("option must be an object")
+        if "text" not in obj or not isinstance(obj["text"], str):
+            raise TypeError("option text must be a string")
+        if "is_correct" not in obj or not isinstance(obj["is_correct"], bool):
+            raise TypeError("option is_correct must be a bool")
+        return Option(text=obj["text"], is_correct=obj["is_correct"])
+
+    def get_all_categories(self) -> list[Category]:
+        return self._flatten_categories(self.categories)
+
+    def _flatten_categories(self, categories: list[Category]) -> list[Category]:
+        result: list[Category] = []
+        for category in categories:
+            result.append(category)
+            result.extend(self._flatten_categories(category.children))
+        return result
+
+    def get_category_by_id(self, id: str) -> Category:
+        found = self._find_category_recursive(self.categories, id)
+        if found is None:
+            raise ValueError(f"category not found: {id}")
+        return found
+
+    def try_get_category_by_id(self, id: str) -> Optional[Category]:
+        return self._find_category_recursive(self.categories, id)
+
+    def find_categories_by_title(
+        self,
+        title: str,
+        *,
+        exact: bool = False,
+        case_sensitive: bool = False,
+    ) -> list[Category]:
+        categories = self.get_all_categories()
+
+        if not case_sensitive:
+            needle = title.lower()
+            if exact:
+                return [c for c in categories if c.title.lower() == needle]
+            return [c for c in categories if needle in c.title.lower()]
+
+        if exact:
+            return [c for c in categories if c.title == title]
+        return [c for c in categories if title in c.title]
+
+    def _find_category_recursive(
+        self,
+        categories: list[Category],
+        id: str,
+    ) -> Optional[Category]:
+        for category in categories:
+            if category.id == id:
+                return category
+            found = self._find_category_recursive(category.children, id)
+            if found is not None:
+                return found
+        return None
+
+    def get_all_questions(self) -> list[Question]:
+        return list(self.questions)
+
+    def count_questions(self) -> int:
+        return len(self.questions)
+
+    def get_question_by_id(self, id: str) -> Question:
+        for question in self.questions:
+            if question.id == id:
+                return question
+        raise ValueError(f"question not found: {id}")
+
+    def try_get_question_by_id(self, id: str) -> Optional[Question]:
+        for question in self.questions:
+            if question.id == id:
+                return question
+        return None
+
+    def search_questions(
+        self,
+        text: str,
+        *,
+        case_sensitive: bool = False,
+        include_explanations: bool = True,
+        include_answers: bool = False,
+    ) -> list[Question]:
+        results: list[Question] = []
+        needle = text if case_sensitive else text.lower()
+
+        for q in self.questions:
+            haystacks = [q.question]
+            if include_explanations and q.explanation:
+                haystacks.append(q.explanation)
+            if include_answers:
+                haystacks.append(q.correct_answer)
+
+            if not case_sensitive:
+                haystacks = [h.lower() for h in haystacks]
+
+            if any(needle in h for h in haystacks):
+                results.append(q)
+
+        return results
+
+    def get_questions_by_difficulty(self, difficulty: Difficulty) -> list[Question]:
+        return [q for q in self.questions if q.difficulty == difficulty]
+
+    def get_questions_by_category_id(
+        self,
+        category_id: str,
+        *,
+        include_descendants: bool = False,
+    ) -> list[Question]:
+        if include_descendants:
+            category = self.get_category_by_id(category_id)
+            valid_ids = {c.id for c in self._flatten_categories([category])}
+            return [
+                q
+                for q in self.questions
+                if any(c.id in valid_ids for c in q.categories)
+            ]
+
+        return [
+            q for q in self.questions if any(c.id == category_id for c in q.categories)
+        ]
+
+    def filter_questions(
+        self,
+        *,
+        category_ids: Optional[list[str]] = None,
+        difficulties: Optional[list[Difficulty]] = None,
+        text: Optional[str] = None,
+        match_all_categories: bool = False,
+        include_category_descendants: bool = False,
+    ) -> list[Question]:
+        results = list(self.questions)
+
+        if category_ids:
+            valid_category_ids: set[str] = set()
+
+            if include_category_descendants:
+                for category_id in category_ids:
+                    category = self.get_category_by_id(category_id)
+                    valid_category_ids.update(
+                        c.id for c in self._flatten_categories([category])
+                    )
+            else:
+                valid_category_ids = set(category_ids)
+
+            if match_all_categories:
+                results = [
+                    q
+                    for q in results
+                    if valid_category_ids.issubset({c.id for c in q.categories})
+                ]
+            else:
+                results = [
+                    q
+                    for q in results
+                    if any(c.id in valid_category_ids for c in q.categories)
+                ]
+
+        if difficulties:
+            difficulty_set = set(difficulties)
+            results = [q for q in results if q.difficulty in difficulty_set]
+
+        if text:
+            needle = text.lower()
+            results = [q for q in results if needle in q.question.lower()]
+
+        return results
+
+    def get_random_question(self) -> Question:
+        if not self.questions:
+            raise ValueError("no questions available")
+        return random.choice(self.questions)
+
+    def get_random_questions(self, count: int) -> list[Question]:
+        if count < 0:
+            raise ValueError("count must be >= 0")
+        if count > len(self.questions):
+            raise ValueError("count cannot exceed number of questions")
+        return random.sample(self.questions, count)
+
+    def get_random_filtered_question(
+        self,
+        *,
+        category_ids: Optional[list[str]] = None,
+        difficulties: Optional[list[Difficulty]] = None,
+        text: Optional[str] = None,
+        match_all_categories: bool = False,
+        include_category_descendants: bool = False,
+    ) -> Question:
+        questions = self.filter_questions(
+            category_ids=category_ids,
+            difficulties=difficulties,
+            text=text,
+            match_all_categories=match_all_categories,
+            include_category_descendants=include_category_descendants,
+        )
+        if not questions:
+            raise ValueError("no questions matched the given filters")
+        return random.choice(questions)

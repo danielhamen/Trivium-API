@@ -1,0 +1,1665 @@
+[
+  {
+    "id": "geography",
+    "title": "Geography",
+    "description": "Questions about places, maps, regions, and the physical world.",
+    "children": [
+      {
+        "id": "geography.world_geography",
+        "title": "World Geography",
+        "description": "Questions about global regions, countries, and world locations.",
+        "children": [
+          {
+            "id": "geography.world_geography.continents",
+            "title": "Continents",
+            "description": "Questions about continents and major world regions."
+          },
+          {
+            "id": "geography.world_geography.countries",
+            "title": "Countries",
+            "description": "Questions about countries, their locations, and basic facts."
+          },
+          {
+            "id": "geography.world_geography.physical_geography",
+            "title": "Physical Geography",
+            "description": "Questions about mountains, rivers, deserts, and landforms."
+          }
+        ]
+      },
+      {
+        "id": "geography.canada_geography",
+        "title": "Canada Geography",
+        "description": "Questions about Canada's provinces, cities, and landmarks.",
+        "children": [
+          {
+            "id": "geography.canada_geography.provinces_territories",
+            "title": "Provinces & Territories",
+            "description": "Questions about Canadian provinces and territories."
+          },
+          {
+            "id": "geography.canada_geography.canadian_landmarks",
+            "title": "Canadian Landmarks",
+            "description": "Questions about famous places and landmarks in Canada."
+          },
+          {
+            "id": "geography.canada_geography.canadian_capitals",
+            "title": "Canadian Capitals",
+            "description": "Questions about provincial, territorial, and national capitals in Canada."
+          }
+        ]
+      },
+      {
+        "id": "geography.usa_geography",
+        "title": "USA Geography",
+        "description": "Questions about U.S. states, cities, and natural landmarks.",
+        "children": [
+          {
+            "id": "geography.usa_geography.states",
+            "title": "States",
+            "description": "Questions about U.S. states and their locations."
+          },
+          {
+            "id": "geography.usa_geography.major_cities",
+            "title": "Major Cities",
+            "description": "Questions about major cities in the United States."
+          },
+          {
+            "id": "geography.usa_geography.national_parks",
+            "title": "National Parks",
+            "description": "Questions about U.S. national parks and natural sites."
+          }
+        ]
+      },
+      {
+        "id": "geography.capitals",
+        "title": "Capitals",
+        "description": "Questions about capital cities around the world.",
+        "children": [
+          {
+            "id": "geography.capitals.world_capitals",
+            "title": "World Capitals",
+            "description": "Questions about capital cities of countries worldwide."
+          },
+          {
+            "id": "geography.capitals.european_capitals",
+            "title": "European Capitals",
+            "description": "Questions about capitals of European countries."
+          },
+          {
+            "id": "geography.capitals.asian_capitals",
+            "title": "Asian Capitals",
+            "description": "Questions about capitals of Asian countries."
+          }
+        ]
+      },
+      {
+        "id": "geography.countries_flags",
+        "title": "Countries & Flags",
+        "description": "Questions about country identities, shapes, and national flags.",
+        "children": [
+          {
+            "id": "geography.countries_flags.national_flags",
+            "title": "National Flags",
+            "description": "Questions about identifying and matching country flags."
+          },
+          {
+            "id": "geography.countries_flags.country_shapes",
+            "title": "Country Shapes",
+            "description": "Questions about identifying countries by their outline."
+          },
+          {
+            "id": "geography.countries_flags.borders",
+            "title": "Borders",
+            "description": "Questions about neighboring countries and border relationships."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "history",
+    "title": "History",
+    "description": "Questions about historical periods, people, and major events.",
+    "children": [
+      {
+        "id": "history.ancient_history",
+        "title": "Ancient History",
+        "description": "Questions about ancient civilizations and early empires.",
+        "children": [
+          {
+            "id": "history.ancient_history.egypt",
+            "title": "Egypt",
+            "description": "Questions about ancient Egypt, pharaohs, and monuments."
+          },
+          {
+            "id": "history.ancient_history.greece",
+            "title": "Greece",
+            "description": "Questions about ancient Greece, city-states, and culture."
+          },
+          {
+            "id": "history.ancient_history.rome",
+            "title": "Rome",
+            "description": "Questions about ancient Rome, emperors, and the republic."
+          }
+        ]
+      },
+      {
+        "id": "history.medieval_history",
+        "title": "Medieval History",
+        "description": "Questions about the Middle Ages, kingdoms, and feudal life.",
+        "children": [
+          {
+            "id": "history.medieval_history.castles",
+            "title": "Castles",
+            "description": "Questions about castles, fortifications, and medieval architecture."
+          },
+          {
+            "id": "history.medieval_history.kings_queens",
+            "title": "Kings & Queens",
+            "description": "Questions about monarchs, dynasties, and royal history."
+          },
+          {
+            "id": "history.medieval_history.crusades",
+            "title": "Crusades",
+            "description": "Questions about the Crusades and medieval religious wars."
+          }
+        ]
+      },
+      {
+        "id": "history.modern_history",
+        "title": "Modern History",
+        "description": "Questions about recent centuries, revolutions, and global change.",
+        "children": [
+          {
+            "id": "history.modern_history.industrial_revolution",
+            "title": "Industrial Revolution",
+            "description": "Questions about industrialization, inventions, and social change."
+          },
+          {
+            "id": "history.modern_history.cold_war",
+            "title": "Cold War",
+            "description": "Questions about the Cold War, superpowers, and global tensions."
+          },
+          {
+            "id": "history.modern_history.twentieth_century",
+            "title": "20th Century",
+            "description": "Questions about major events and people of the 1900s."
+          }
+        ]
+      },
+      {
+        "id": "history.canadian_history",
+        "title": "Canadian History",
+        "description": "Questions about Canada's development, leaders, and past conflicts.",
+        "children": [
+          {
+            "id": "history.canadian_history.confederation",
+            "title": "Confederation",
+            "description": "Questions about the founding and formation of Canada."
+          },
+          {
+            "id": "history.canadian_history.prime_ministers",
+            "title": "Prime Ministers",
+            "description": "Questions about Canadian prime ministers and their eras."
+          },
+          {
+            "id": "history.canadian_history.indigenous_history",
+            "title": "Indigenous History",
+            "description": "Questions about Indigenous peoples, cultures, and historical events in Canada."
+          }
+        ]
+      },
+      {
+        "id": "history.wars_battles",
+        "title": "Wars & Battles",
+        "description": "Questions about famous wars, military campaigns, and battles.",
+        "children": [
+          {
+            "id": "history.wars_battles.world_war_i",
+            "title": "World War I",
+            "description": "Questions about WWI events, leaders, and battles."
+          },
+          {
+            "id": "history.wars_battles.world_war_ii",
+            "title": "World War II",
+            "description": "Questions about WWII events, leaders, and battles."
+          },
+          {
+            "id": "history.wars_battles.napoleon",
+            "title": "Napoleon",
+            "description": "Questions about Napoleon, his empire, and his wars."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "politics_society",
+    "title": "Politics & Society",
+    "description": "Questions about government, society, political systems, and public life.",
+    "children": [
+      {
+        "id": "politics_society.politics",
+        "title": "Politics",
+        "description": "Questions about political ideas, elections, and systems of rule.",
+        "children": [
+          {
+            "id": "politics_society.politics.elections",
+            "title": "Elections",
+            "description": "Questions about voting, campaigns, and election processes."
+          },
+          {
+            "id": "politics_society.politics.political_systems",
+            "title": "Political Systems",
+            "description": "Questions about democracies, monarchies, and other systems."
+          },
+          {
+            "id": "politics_society.politics.ideologies",
+            "title": "Ideologies",
+            "description": "Questions about major political beliefs and movements."
+          }
+        ]
+      },
+      {
+        "id": "politics_society.government",
+        "title": "Government",
+        "description": "Questions about how governments are organized and operate.",
+        "children": [
+          {
+            "id": "politics_society.government.branches_of_government",
+            "title": "Branches of Government",
+            "description": "Questions about executive, legislative, and judicial branches."
+          },
+          {
+            "id": "politics_society.government.constitutions",
+            "title": "Constitutions",
+            "description": "Questions about constitutions, charters, and foundational laws."
+          },
+          {
+            "id": "politics_society.government.parliament",
+            "title": "Parliament",
+            "description": "Questions about parliamentary systems, procedures, and roles."
+          }
+        ]
+      },
+      {
+        "id": "politics_society.economics",
+        "title": "Economics",
+        "description": "Questions about markets, money, and economic ideas.",
+        "children": [
+          {
+            "id": "politics_society.economics.supply_demand",
+            "title": "Supply & Demand",
+            "description": "Questions about how prices and markets respond to supply and demand."
+          },
+          {
+            "id": "politics_society.economics.inflation",
+            "title": "Inflation",
+            "description": "Questions about rising prices, currency value, and cost of living."
+          },
+          {
+            "id": "politics_society.economics.trade",
+            "title": "Trade",
+            "description": "Questions about imports, exports, tariffs, and global trade."
+          }
+        ]
+      },
+      {
+        "id": "politics_society.business",
+        "title": "Business",
+        "description": "Questions about companies, leadership, and entrepreneurship.",
+        "children": [
+          {
+            "id": "politics_society.business.entrepreneurship",
+            "title": "Entrepreneurship",
+            "description": "Questions about starting businesses and building ventures."
+          },
+          {
+            "id": "politics_society.business.startups",
+            "title": "Startups",
+            "description": "Questions about startup culture, growth, and innovation."
+          },
+          {
+            "id": "politics_society.business.ceos",
+            "title": "CEOs",
+            "description": "Questions about major business leaders and executives."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "language_literature",
+    "title": "Language & Literature",
+    "description": "Questions about books, language, grammar, and word meaning.",
+    "children": [
+      {
+        "id": "language_literature.literature",
+        "title": "Literature",
+        "description": "Questions about books, authors, and literary forms.",
+        "children": [
+          {
+            "id": "language_literature.literature.classic_literature",
+            "title": "Classic Literature",
+            "description": "Questions about classic novels, plays, and authors."
+          },
+          {
+            "id": "language_literature.literature.modern_literature",
+            "title": "Modern Literature",
+            "description": "Questions about modern books, authors, and literary movements."
+          },
+          {
+            "id": "language_literature.literature.poetry",
+            "title": "Poetry",
+            "description": "Questions about poems, poets, and poetic devices."
+          }
+        ]
+      },
+      {
+        "id": "language_literature.translation",
+        "title": "Translation",
+        "description": "Questions about vocabulary and translation between languages.",
+        "children": [
+          {
+            "id": "language_literature.translation.german",
+            "title": "German",
+            "description": "Questions involving German words, phrases, and translations."
+          },
+          {
+            "id": "language_literature.translation.french",
+            "title": "French",
+            "description": "Questions involving French words, phrases, and translations."
+          },
+          {
+            "id": "language_literature.translation.spanish",
+            "title": "Spanish",
+            "description": "Questions involving Spanish words, phrases, and translations."
+          },
+          {
+            "id": "language_literature.translation.arabic",
+            "title": "Arabic",
+            "description": "Questions involving Arabic words, phrases, and translations."
+          },
+          {
+            "id": "language_literature.translation.japanese",
+            "title": "Japanese",
+            "description": "Questions involving Japanese words, phrases, and translations."
+          }
+        ]
+      },
+      {
+        "id": "language_literature.grammar",
+        "title": "Grammar",
+        "description": "Questions about sentence rules and language structure.",
+        "children": [
+          {
+            "id": "language_literature.grammar.parts_of_speech",
+            "title": "Parts of Speech",
+            "description": "Questions about nouns, verbs, adjectives, and more."
+          },
+          {
+            "id": "language_literature.grammar.sentence_structure",
+            "title": "Sentence Structure",
+            "description": "Questions about clauses, phrases, and sentence patterns."
+          },
+          {
+            "id": "language_literature.grammar.punctuation",
+            "title": "Punctuation",
+            "description": "Questions about commas, periods, apostrophes, and punctuation rules."
+          }
+        ]
+      },
+      {
+        "id": "language_literature.vocabulary",
+        "title": "Vocabulary",
+        "description": "Questions about word meanings and relationships.",
+        "children": [
+          {
+            "id": "language_literature.vocabulary.synonyms",
+            "title": "Synonyms",
+            "description": "Questions about words with similar meanings."
+          },
+          {
+            "id": "language_literature.vocabulary.antonyms",
+            "title": "Antonyms",
+            "description": "Questions about words with opposite meanings."
+          },
+          {
+            "id": "language_literature.vocabulary.word_origins",
+            "title": "Word Origins",
+            "description": "Questions about etymology and where words come from."
+          }
+        ]
+      },
+      {
+        "id": "language_literature.abbreviations",
+        "title": "Abbreviations",
+        "description": "Questions about shortened words, initials, and acronyms.",
+        "children": [
+          {
+            "id": "language_literature.abbreviations.scientific_abbreviations",
+            "title": "Scientific Abbreviations",
+            "description": "Questions about abbreviations used in science and medicine."
+          },
+          {
+            "id": "language_literature.abbreviations.internet_slang",
+            "title": "Internet Slang",
+            "description": "Questions about online abbreviations and slang terms."
+          },
+          {
+            "id": "language_literature.abbreviations.government_acronyms",
+            "title": "Government Acronyms",
+            "description": "Questions about government agencies and official acronyms."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mythology_religion",
+    "title": "Mythology & Religion",
+    "description": "Questions about myths, gods, legends, and world religions.",
+    "children": [
+      {
+        "id": "mythology_religion.greek_mythology",
+        "title": "Greek Mythology",
+        "description": "Questions about Greek gods, heroes, and mythical creatures.",
+        "children": [
+          {
+            "id": "mythology_religion.greek_mythology.olympian_gods",
+            "title": "Olympian Gods",
+            "description": "Questions about Zeus, Hera, Athena, and the Olympians."
+          },
+          {
+            "id": "mythology_religion.greek_mythology.heroes",
+            "title": "Heroes",
+            "description": "Questions about Greek heroes and their adventures."
+          },
+          {
+            "id": "mythology_religion.greek_mythology.monsters",
+            "title": "Monsters",
+            "description": "Questions about Greek monsters and legendary beasts."
+          }
+        ]
+      },
+      {
+        "id": "mythology_religion.roman_mythology",
+        "title": "Roman Mythology",
+        "description": "Questions about Roman gods, myths, and legends.",
+        "children": [
+          {
+            "id": "mythology_religion.roman_mythology.gods_goddesses",
+            "title": "Gods & Goddesses",
+            "description": "Questions about Roman deities and their domains."
+          },
+          {
+            "id": "mythology_religion.roman_mythology.legends",
+            "title": "Legends",
+            "description": "Questions about Roman myths and legendary stories."
+          }
+        ]
+      },
+      {
+        "id": "mythology_religion.norse_mythology",
+        "title": "Norse Mythology",
+        "description": "Questions about Norse gods, myths, and Viking legend.",
+        "children": [
+          {
+            "id": "mythology_religion.norse_mythology.gods_of_asgard",
+            "title": "Gods of Asgard",
+            "description": "Questions about Odin, Thor, Loki, and other Norse gods."
+          },
+          {
+            "id": "mythology_religion.norse_mythology.ragnarok",
+            "title": "Ragnarok",
+            "description": "Questions about Ragnarok and the end of the Norse world."
+          }
+        ]
+      },
+      {
+        "id": "mythology_religion.religion",
+        "title": "Religion",
+        "description": "Questions about beliefs, traditions, and major world religions.",
+        "children": [
+          {
+            "id": "mythology_religion.religion.christianity",
+            "title": "Christianity",
+            "description": "Questions about Christianity, the Bible, and traditions."
+          },
+          {
+            "id": "mythology_religion.religion.islam",
+            "title": "Islam",
+            "description": "Questions about Islam, the Quran, and Islamic traditions."
+          },
+          {
+            "id": "mythology_religion.religion.hinduism",
+            "title": "Hinduism",
+            "description": "Questions about Hindu beliefs, texts, and practices."
+          },
+          {
+            "id": "mythology_religion.religion.buddhism",
+            "title": "Buddhism",
+            "description": "Questions about Buddhism, teachings, and traditions."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "science",
+    "title": "Science",
+    "description": "Questions about scientific fields, ideas, and discoveries.",
+    "children": [
+      {
+        "id": "science.physics",
+        "title": "Physics",
+        "description": "Questions about matter, motion, forces, and energy.",
+        "children": [
+          {
+            "id": "science.physics.mechanics",
+            "title": "Mechanics",
+            "description": "Questions about motion, force, speed, and acceleration."
+          },
+          {
+            "id": "science.physics.electricity",
+            "title": "Electricity",
+            "description": "Questions about circuits, current, voltage, and charge."
+          },
+          {
+            "id": "science.physics.optics",
+            "title": "Optics",
+            "description": "Questions about light, reflection, and lenses."
+          }
+        ]
+      },
+      {
+        "id": "science.chemistry",
+        "title": "Chemistry",
+        "description": "Questions about substances, atoms, and chemical change.",
+        "children": [
+          {
+            "id": "science.chemistry.elements",
+            "title": "Elements",
+            "description": "Questions about chemical elements and their properties."
+          },
+          {
+            "id": "science.chemistry.periodic_table",
+            "title": "Periodic Table",
+            "description": "Questions about element groups, periods, and organization."
+          },
+          {
+            "id": "science.chemistry.chemical_reactions",
+            "title": "Chemical Reactions",
+            "description": "Questions about reactions, products, and equations."
+          },
+          {
+            "id": "science.chemistry.chemical_symbols",
+            "title": "Chemical Symbols",
+            "description": "Questions about chemical symbols."
+          }
+        ]
+      },
+      {
+        "id": "science.biology",
+        "title": "Biology",
+        "description": "Questions about living things and life processes.",
+        "children": [
+          {
+            "id": "science.biology.cells",
+            "title": "Cells",
+            "description": "Questions about cell structure, function, and organelles."
+          },
+          {
+            "id": "science.biology.genetics",
+            "title": "Genetics",
+            "description": "Questions about DNA, genes, and heredity."
+          },
+          {
+            "id": "science.biology.evolution",
+            "title": "Evolution",
+            "description": "Questions about natural selection and species change."
+          }
+        ]
+      },
+      {
+        "id": "science.human_anatomy",
+        "title": "Human Anatomy",
+        "description": "Questions about body systems, organs, and anatomy.",
+        "children": [
+          {
+            "id": "science.human_anatomy.skeletal_system",
+            "title": "Skeletal System",
+            "description": "Questions about bones, joints, and the human skeleton."
+          },
+          {
+            "id": "science.human_anatomy.muscular_system",
+            "title": "Muscular System",
+            "description": "Questions about muscles and body movement."
+          },
+          {
+            "id": "science.human_anatomy.nervous_system",
+            "title": "Nervous System",
+            "description": "Questions about nerves, the brain, and body signals."
+          }
+        ]
+      },
+      {
+        "id": "science.astronomy",
+        "title": "Astronomy",
+        "description": "Questions about space, celestial bodies, and the universe.",
+        "children": [
+          {
+            "id": "science.astronomy.planets",
+            "title": "Planets",
+            "description": "Questions about planets and their features."
+          },
+          {
+            "id": "science.astronomy.stars",
+            "title": "Stars",
+            "description": "Questions about stars, constellations, and stellar life."
+          },
+          {
+            "id": "science.astronomy.galaxies",
+            "title": "Galaxies",
+            "description": "Questions about galaxies, nebulae, and deep space."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mathematics",
+    "title": "Mathematics",
+    "description": "Questions about numbers, patterns, equations, and mathematical reasoning.",
+    "children": [
+      {
+        "id": "mathematics.arithmetic",
+        "title": "Arithmetic",
+        "description": "Questions about basic number operations and calculations.",
+        "children": [
+          {
+            "id": "mathematics.arithmetic.fractions",
+            "title": "Fractions",
+            "description": "Questions about fraction operations and comparisons."
+          },
+          {
+            "id": "mathematics.arithmetic.percentages",
+            "title": "Percentages",
+            "description": "Questions about percents, increases, and decreases."
+          },
+          {
+            "id": "mathematics.arithmetic.ratios",
+            "title": "Ratios",
+            "description": "Questions about ratios, proportions, and comparisons."
+          }
+        ]
+      },
+      {
+        "id": "mathematics.algebra",
+        "title": "Algebra",
+        "description": "Questions about variables, equations, and expressions.",
+        "children": [
+          {
+            "id": "mathematics.algebra.equations",
+            "title": "Equations",
+            "description": "Questions about solving algebraic equations."
+          },
+          {
+            "id": "mathematics.algebra.functions",
+            "title": "Functions",
+            "description": "Questions about inputs, outputs, and function behavior."
+          },
+          {
+            "id": "mathematics.algebra.polynomials",
+            "title": "Polynomials",
+            "description": "Questions about polynomial expressions and operations."
+          }
+        ]
+      },
+      {
+        "id": "mathematics.geometry",
+        "title": "Geometry",
+        "description": "Questions about shapes, angles, and spatial relationships.",
+        "children": [
+          {
+            "id": "mathematics.geometry.triangles",
+            "title": "Triangles",
+            "description": "Questions about triangle types, angles, and properties."
+          },
+          {
+            "id": "mathematics.geometry.circles",
+            "title": "Circles",
+            "description": "Questions about radius, diameter, and circle formulas."
+          },
+          {
+            "id": "mathematics.geometry.coordinate_geometry",
+            "title": "Coordinate Geometry",
+            "description": "Questions about points, slopes, and graphs on a plane."
+          }
+        ]
+      },
+      {
+        "id": "mathematics.calculus",
+        "title": "Calculus",
+        "description": "Questions about change, motion, and accumulation.",
+        "children": [
+          {
+            "id": "mathematics.calculus.derivatives",
+            "title": "Derivatives",
+            "description": "Questions about rates of change and differentiation."
+          },
+          {
+            "id": "mathematics.calculus.integrals",
+            "title": "Integrals",
+            "description": "Questions about area, accumulation, and integration."
+          },
+          {
+            "id": "mathematics.calculus.limits",
+            "title": "Limits",
+            "description": "Questions about approaching values and continuity."
+          }
+        ]
+      },
+      {
+        "id": "mathematics.logic",
+        "title": "Logic",
+        "description": "Questions about reasoning, patterns, and proof.",
+        "children": [
+          {
+            "id": "mathematics.logic.deduction",
+            "title": "Deduction",
+            "description": "Questions about drawing conclusions from given facts."
+          },
+          {
+            "id": "mathematics.logic.proofs",
+            "title": "Proofs",
+            "description": "Questions about mathematical proof methods and structure."
+          },
+          {
+            "id": "mathematics.logic.patterns",
+            "title": "Patterns",
+            "description": "Questions about sequences, rules, and logical patterns."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "technology",
+    "title": "Technology",
+    "description": "Questions about computers, programming, networks, and modern tech.",
+    "children": [
+      {
+        "id": "technology.computer_science",
+        "title": "Computer Science",
+        "description": "Questions about computing theory and core computer concepts.",
+        "children": [
+          {
+            "id": "technology.computer_science.algorithms",
+            "title": "Algorithms",
+            "description": "Questions about step-by-step problem solving and efficiency."
+          },
+          {
+            "id": "technology.computer_science.data_structures",
+            "title": "Data Structures",
+            "description": "Questions about arrays, trees, graphs, and other structures."
+          },
+          {
+            "id": "technology.computer_science.binary",
+            "title": "Binary",
+            "description": "Questions about bits, binary numbers, and base-2 logic."
+          }
+        ]
+      },
+      {
+        "id": "technology.programming",
+        "title": "Programming",
+        "description": "Questions about coding languages and software development.",
+        "children": [
+          {
+            "id": "technology.programming.python",
+            "title": "Python",
+            "description": "Questions about Python syntax, features, and usage."
+          },
+          {
+            "id": "technology.programming.java",
+            "title": "Java",
+            "description": "Questions about Java syntax, concepts, and programming."
+          },
+          {
+            "id": "technology.programming.cpp",
+            "title": "C++",
+            "description": "Questions about C++ syntax, features, and memory concepts."
+          },
+          {
+            "id": "technology.programming.javascript",
+            "title": "JavaScript",
+            "description": "Questions about JavaScript, web scripting, and browser logic."
+          }
+        ]
+      },
+      {
+        "id": "technology.cybersecurity",
+        "title": "Cybersecurity",
+        "description": "Questions about digital safety, privacy, and system protection.",
+        "children": [
+          {
+            "id": "technology.cybersecurity.encryption",
+            "title": "Encryption",
+            "description": "Questions about encoding data and secure communication."
+          },
+          {
+            "id": "technology.cybersecurity.password_security",
+            "title": "Password Security",
+            "description": "Questions about strong passwords, authentication, and account safety."
+          },
+          {
+            "id": "technology.cybersecurity.networking",
+            "title": "Networking",
+            "description": "Questions about networks, protocols, and data transmission."
+          }
+        ]
+      },
+      {
+        "id": "technology.artificial_intelligence",
+        "title": "Artificial Intelligence",
+        "description": "Questions about smart systems, models, and machine behavior.",
+        "children": [
+          {
+            "id": "technology.artificial_intelligence.machine_learning",
+            "title": "Machine Learning",
+            "description": "Questions about training models and learning from data."
+          },
+          {
+            "id": "technology.artificial_intelligence.neural_networks",
+            "title": "Neural Networks",
+            "description": "Questions about layers, neurons, and deep learning models."
+          },
+          {
+            "id": "technology.artificial_intelligence.computer_vision",
+            "title": "Computer Vision",
+            "description": "Questions about image analysis and visual recognition systems."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "transportation",
+    "title": "Transportation",
+    "description": "Questions about vehicles, travel systems, and transportation history.",
+    "children": [
+      {
+        "id": "transportation.cars_automotive",
+        "title": "Cars & Automotive",
+        "description": "Questions about cars, brands, and automotive engineering.",
+        "children": [
+          {
+            "id": "transportation.cars_automotive.supercars",
+            "title": "Supercars",
+            "description": "Questions about high-performance and exotic cars."
+          },
+          {
+            "id": "transportation.cars_automotive.car_brands",
+            "title": "Car Brands",
+            "description": "Questions about car manufacturers and their models."
+          },
+          {
+            "id": "transportation.cars_automotive.engines",
+            "title": "Engines",
+            "description": "Questions about engine types, parts, and performance."
+          }
+        ]
+      },
+      {
+        "id": "transportation.aviation",
+        "title": "Aviation",
+        "description": "Questions about airplanes, airports, and flight.",
+        "children": [
+          {
+            "id": "transportation.aviation.aircraft_types",
+            "title": "Aircraft Types",
+            "description": "Questions about commercial, military, and private aircraft."
+          },
+          {
+            "id": "transportation.aviation.airports",
+            "title": "Airports",
+            "description": "Questions about major airports and aviation hubs."
+          },
+          {
+            "id": "transportation.aviation.pilots",
+            "title": "Pilots",
+            "description": "Questions about pilots, flight roles, and aviation knowledge."
+          }
+        ]
+      },
+      {
+        "id": "transportation.trains_railways",
+        "title": "Trains & Railways",
+        "description": "Questions about trains, rail systems, and railway history.",
+        "children": [
+          {
+            "id": "transportation.trains_railways.locomotives",
+            "title": "Locomotives",
+            "description": "Questions about locomotive types and railway engines."
+          },
+          {
+            "id": "transportation.trains_railways.subway_systems",
+            "title": "Subway Systems",
+            "description": "Questions about metro systems and urban rail transit."
+          },
+          {
+            "id": "transportation.trains_railways.high_speed_rail",
+            "title": "High-Speed Rail",
+            "description": "Questions about bullet trains and fast rail networks."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "military",
+    "title": "Military",
+    "description": "Questions about warfare, armies, weapons, and military history.",
+    "children": [
+      {
+        "id": "military.military_history",
+        "title": "Military History",
+        "description": "Questions about historical warfare and major conflicts.",
+        "children": [
+          {
+            "id": "military.military_history.ancient_warfare",
+            "title": "Ancient Warfare",
+            "description": "Questions about warfare in ancient civilizations."
+          },
+          {
+            "id": "military.military_history.modern_warfare",
+            "title": "Modern Warfare",
+            "description": "Questions about modern military tactics and conflict."
+          }
+        ]
+      },
+      {
+        "id": "military.weapons",
+        "title": "Weapons",
+        "description": "Questions about historical and modern weapons.",
+        "children": [
+          {
+            "id": "military.weapons.swords",
+            "title": "Swords",
+            "description": "Questions about sword types, history, and famous blades."
+          },
+          {
+            "id": "military.weapons.cannons",
+            "title": "Cannons",
+            "description": "Questions about artillery, cannons, and early firearms."
+          },
+          {
+            "id": "military.weapons.tanks",
+            "title": "Tanks",
+            "description": "Questions about tanks, armored vehicles, and battlefield roles."
+          }
+        ]
+      },
+      {
+        "id": "military.world_wars",
+        "title": "World Wars",
+        "description": "Questions about the global wars of the 20th century.",
+        "children": [
+          {
+            "id": "military.world_wars.wwi",
+            "title": "WWI",
+            "description": "Questions about World War I events, leaders, and battles."
+          },
+          {
+            "id": "military.world_wars.wwii",
+            "title": "WWII",
+            "description": "Questions about World War II events, leaders, and battles."
+          },
+          {
+            "id": "military.world_wars.cold_war",
+            "title": "Cold War",
+            "description": "Questions about the Cold War and military tension between blocs."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sports",
+    "title": "Sports",
+    "description": "Questions about teams, players, leagues, and sports history.",
+    "children": [
+      {
+        "id": "sports.football",
+        "title": "Football",
+        "description": "Questions about American football leagues, teams, and players.",
+        "children": [
+          {
+            "id": "sports.football.nfl",
+            "title": "NFL",
+            "description": "Questions about the National Football League."
+          },
+          {
+            "id": "sports.football.super_bowl",
+            "title": "Super Bowl",
+            "description": "Questions about Super Bowl games, winners, and moments."
+          },
+          {
+            "id": "sports.football.quarterbacks",
+            "title": "Quarterbacks",
+            "description": "Questions about famous quarterbacks and their records."
+          }
+        ]
+      },
+      {
+        "id": "sports.soccer",
+        "title": "Soccer",
+        "description": "Questions about world soccer, clubs, and tournaments.",
+        "children": [
+          {
+            "id": "sports.soccer.fifa",
+            "title": "FIFA",
+            "description": "Questions about FIFA and world football governance."
+          },
+          {
+            "id": "sports.soccer.world_cup",
+            "title": "World Cup",
+            "description": "Questions about FIFA World Cup history and winners."
+          },
+          {
+            "id": "sports.soccer.clubs",
+            "title": "Clubs",
+            "description": "Questions about famous soccer clubs and leagues."
+          }
+        ]
+      },
+      {
+        "id": "sports.basketball",
+        "title": "Basketball",
+        "description": "Questions about basketball leagues, teams, and stars.",
+        "children": [
+          {
+            "id": "sports.basketball.nba",
+            "title": "NBA",
+            "description": "Questions about the NBA, teams, and seasons."
+          },
+          {
+            "id": "sports.basketball.championships",
+            "title": "Championships",
+            "description": "Questions about basketball titles and finals history."
+          },
+          {
+            "id": "sports.basketball.players",
+            "title": "Players",
+            "description": "Questions about famous basketball players and records."
+          }
+        ]
+      },
+      {
+        "id": "sports.hockey",
+        "title": "Hockey",
+        "description": "Questions about hockey leagues, teams, and trophies.",
+        "children": [
+          {
+            "id": "sports.hockey.nhl",
+            "title": "NHL",
+            "description": "Questions about the National Hockey League."
+          },
+          {
+            "id": "sports.hockey.stanley_cup",
+            "title": "Stanley Cup",
+            "description": "Questions about Stanley Cup history and winners."
+          },
+          {
+            "id": "sports.hockey.teams",
+            "title": "Teams",
+            "description": "Questions about hockey teams, franchises, and rivalries."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "entertainment",
+    "title": "Entertainment",
+    "description": "Questions about movies, television, anime, celebrities, and pop culture.",
+    "children": [
+      {
+        "id": "entertainment.movies",
+        "title": "Movies",
+        "description": "Questions about films, genres, and awards.",
+        "children": [
+          {
+            "id": "entertainment.movies.action",
+            "title": "Action",
+            "description": "Questions about action movies and their stars."
+          },
+          {
+            "id": "entertainment.movies.animated",
+            "title": "Animated",
+            "description": "Questions about animated films and studios."
+          },
+          {
+            "id": "entertainment.movies.oscar_winners",
+            "title": "Oscar Winners",
+            "description": "Questions about Academy Award-winning films and performances."
+          }
+        ]
+      },
+      {
+        "id": "entertainment.tv_shows",
+        "title": "TV Shows",
+        "description": "Questions about television series, formats, and famous programs.",
+        "children": [
+          {
+            "id": "entertainment.tv_shows.sitcoms",
+            "title": "Sitcoms",
+            "description": "Questions about comedy series and famous sitcom moments."
+          },
+          {
+            "id": "entertainment.tv_shows.drama_series",
+            "title": "Drama Series",
+            "description": "Questions about dramatic television series and characters."
+          },
+          {
+            "id": "entertainment.tv_shows.game_shows",
+            "title": "Game Shows",
+            "description": "Questions about quiz shows, hosts, and formats."
+          }
+        ]
+      },
+      {
+        "id": "entertainment.anime",
+        "title": "Anime",
+        "description": "Questions about Japanese animation, studios, and series.",
+        "children": [
+          {
+            "id": "entertainment.anime.shonen",
+            "title": "Shonen",
+            "description": "Questions about action-focused anime aimed at younger audiences."
+          },
+          {
+            "id": "entertainment.anime.studio_ghibli",
+            "title": "Studio Ghibli",
+            "description": "Questions about Studio Ghibli films and creators."
+          },
+          {
+            "id": "entertainment.anime.classics",
+            "title": "Classics",
+            "description": "Questions about classic and influential anime series."
+          }
+        ]
+      },
+      {
+        "id": "entertainment.celebrities",
+        "title": "Celebrities",
+        "description": "Questions about famous people in entertainment and media.",
+        "children": [
+          {
+            "id": "entertainment.celebrities.actors",
+            "title": "Actors",
+            "description": "Questions about actors, roles, and film careers."
+          },
+          {
+            "id": "entertainment.celebrities.influencers",
+            "title": "Influencers",
+            "description": "Questions about internet personalities and creators."
+          },
+          {
+            "id": "entertainment.celebrities.directors",
+            "title": "Directors",
+            "description": "Questions about film directors and their works."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "music",
+    "title": "Music",
+    "description": "Questions about songs, artists, albums, genres, and music history.",
+    "children": [
+      {
+        "id": "music.songs",
+        "title": "Songs",
+        "description": "Questions about songs, lyrics, and chart success.",
+        "children": [
+          {
+            "id": "music.songs.lyrics",
+            "title": "Lyrics",
+            "description": "Questions about identifying songs from lyric clues."
+          },
+          {
+            "id": "music.songs.chart_hits",
+            "title": "Chart Hits",
+            "description": "Questions about popular songs and chart-topping tracks."
+          }
+        ]
+      },
+      {
+        "id": "music.albums",
+        "title": "Albums",
+        "description": "Questions about albums, releases, and music milestones.",
+        "children": [
+          {
+            "id": "music.albums.debut_albums",
+            "title": "Debut Albums",
+            "description": "Questions about artists' first major albums."
+          },
+          {
+            "id": "music.albums.grammy_winners",
+            "title": "Grammy Winners",
+            "description": "Questions about Grammy-winning albums and artists."
+          }
+        ]
+      },
+      {
+        "id": "music.musical_artists",
+        "title": "Musical Artists",
+        "description": "Questions about singers, bands, and performers.",
+        "children": [
+          {
+            "id": "music.musical_artists.pop_artists",
+            "title": "Pop Artists",
+            "description": "Questions about major pop musicians and careers."
+          },
+          {
+            "id": "music.musical_artists.rock_bands",
+            "title": "Rock Bands",
+            "description": "Questions about famous rock bands and their songs."
+          },
+          {
+            "id": "music.musical_artists.rappers",
+            "title": "Rappers",
+            "description": "Questions about rap artists, albums, and lyrics."
+          }
+        ]
+      },
+      {
+        "id": "music.classical_music",
+        "title": "Classical Music",
+        "description": "Questions about classical composers and compositions.",
+        "children": [
+          {
+            "id": "music.classical_music.composers",
+            "title": "Composers",
+            "description": "Questions about famous classical composers."
+          },
+          {
+            "id": "music.classical_music.symphonies",
+            "title": "Symphonies",
+            "description": "Questions about symphonies, orchestral works, and forms."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "games",
+    "title": "Games",
+    "description": "Questions about video games, franchises, and tabletop games.",
+    "children": [
+      {
+        "id": "games.video_games",
+        "title": "Video Games",
+        "description": "Questions about gaming platforms, titles, and franchises.",
+        "children": [
+          {
+            "id": "games.video_games.nintendo",
+            "title": "Nintendo",
+            "description": "Questions about Nintendo consoles, games, and characters."
+          },
+          {
+            "id": "games.video_games.playstation",
+            "title": "PlayStation",
+            "description": "Questions about PlayStation systems and exclusive games."
+          },
+          {
+            "id": "games.video_games.pc_games",
+            "title": "PC Games",
+            "description": "Questions about computer games and PC gaming culture."
+          }
+        ]
+      },
+      {
+        "id": "games.pokemon",
+        "title": "Pokémon",
+        "description": "Questions about the Pokémon franchise, games, and creatures.",
+        "children": [
+          {
+            "id": "games.pokemon.pokemon_species",
+            "title": "Pokémon Species",
+            "description": "Questions about Pokémon names, types, and traits."
+          },
+          {
+            "id": "games.pokemon.regions",
+            "title": "Regions",
+            "description": "Questions about Pokémon regions and their settings."
+          },
+          {
+            "id": "games.pokemon.gym_leaders",
+            "title": "Gym Leaders",
+            "description": "Questions about Gym Leaders and their teams."
+          }
+        ]
+      },
+      {
+        "id": "games.board_games",
+        "title": "Board Games",
+        "description": "Questions about tabletop games, rules, and strategy.",
+        "children": [
+          {
+            "id": "games.board_games.monopoly",
+            "title": "Monopoly",
+            "description": "Questions about Monopoly rules, spaces, and strategy."
+          },
+          {
+            "id": "games.board_games.risk",
+            "title": "Risk",
+            "description": "Questions about Risk gameplay, territories, and tactics."
+          },
+          {
+            "id": "games.board_games.catan",
+            "title": "Catan",
+            "description": "Questions about Catan resources, rules, and strategy."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "art_design",
+    "title": "Art & Design",
+    "description": "Questions about visual art, architecture, design, and fashion.",
+    "children": [
+      {
+        "id": "art_design.paintings",
+        "title": "Paintings",
+        "description": "Questions about painting styles, artists, and famous works.",
+        "children": [
+          {
+            "id": "art_design.paintings.renaissance",
+            "title": "Renaissance",
+            "description": "Questions about Renaissance painters and masterpieces."
+          },
+          {
+            "id": "art_design.paintings.impressionism",
+            "title": "Impressionism",
+            "description": "Questions about Impressionist artists and techniques."
+          },
+          {
+            "id": "art_design.paintings.famous_paintings",
+            "title": "Famous Paintings",
+            "description": "Questions about well-known paintings and their creators."
+          }
+        ]
+      },
+      {
+        "id": "art_design.architecture",
+        "title": "Architecture",
+        "description": "Questions about buildings, styles, and famous structures.",
+        "children": [
+          {
+            "id": "art_design.architecture.skyscrapers",
+            "title": "Skyscrapers",
+            "description": "Questions about tall buildings and iconic towers."
+          },
+          {
+            "id": "art_design.architecture.ancient_wonders",
+            "title": "Ancient Wonders",
+            "description": "Questions about the wonders of the ancient world."
+          },
+          {
+            "id": "art_design.architecture.gothic_design",
+            "title": "Gothic Design",
+            "description": "Questions about Gothic architecture and design features."
+          }
+        ]
+      },
+      {
+        "id": "art_design.fashion",
+        "title": "Fashion",
+        "description": "Questions about fashion trends, houses, and style history.",
+        "children": [
+          {
+            "id": "art_design.fashion.luxury_brands",
+            "title": "Luxury Brands",
+            "description": "Questions about high-end fashion brands and labels."
+          },
+          {
+            "id": "art_design.fashion.designers",
+            "title": "Designers",
+            "description": "Questions about famous fashion designers and their work."
+          },
+          {
+            "id": "art_design.fashion.fashion_history",
+            "title": "Fashion History",
+            "description": "Questions about fashion through different eras and cultures."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "food_lifestyle",
+    "title": "Food & Lifestyle",
+    "description": "Questions about food, drinks, cuisine, and everyday lifestyle topics.",
+    "children": [
+      {
+        "id": "food_lifestyle.food",
+        "title": "Food",
+        "description": "Questions about meals, cuisines, and popular foods.",
+        "children": [
+          {
+            "id": "food_lifestyle.food.fast_food",
+            "title": "Fast Food",
+            "description": "Questions about popular fast-food chains and menu items."
+          },
+          {
+            "id": "food_lifestyle.food.street_food",
+            "title": "Street Food",
+            "description": "Questions about famous street foods from around the world."
+          },
+          {
+            "id": "food_lifestyle.food.national_dishes",
+            "title": "National Dishes",
+            "description": "Questions about iconic dishes tied to specific countries."
+          }
+        ]
+      },
+      {
+        "id": "food_lifestyle.desserts",
+        "title": "Desserts",
+        "description": "Questions about sweets, baking, and dessert traditions.",
+        "children": [
+          {
+            "id": "food_lifestyle.desserts.cakes",
+            "title": "Cakes",
+            "description": "Questions about cake types, ingredients, and styles."
+          },
+          {
+            "id": "food_lifestyle.desserts.pastries",
+            "title": "Pastries",
+            "description": "Questions about pastries, baked sweets, and techniques."
+          },
+          {
+            "id": "food_lifestyle.desserts.ice_cream",
+            "title": "Ice Cream",
+            "description": "Questions about ice cream flavors, history, and brands."
+          }
+        ]
+      },
+      {
+        "id": "food_lifestyle.drinks",
+        "title": "Drinks",
+        "description": "Questions about beverages, preparation, and drink culture.",
+        "children": [
+          {
+            "id": "food_lifestyle.drinks.coffee",
+            "title": "Coffee",
+            "description": "Questions about coffee beans, drinks, and café culture."
+          },
+          {
+            "id": "food_lifestyle.drinks.tea",
+            "title": "Tea",
+            "description": "Questions about tea types, traditions, and preparation."
+          },
+          {
+            "id": "food_lifestyle.drinks.soft_drinks",
+            "title": "Soft Drinks",
+            "description": "Questions about soda brands, flavors, and drink history."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "nature",
+    "title": "Nature",
+    "description": "Questions about animals, plants, fossils, and the natural world.",
+    "children": [
+      {
+        "id": "nature.animals",
+        "title": "Animals",
+        "description": "Questions about animal types, traits, and classification.",
+        "children": [
+          {
+            "id": "nature.animals.mammals",
+            "title": "Mammals",
+            "description": "Questions about mammals and their characteristics."
+          },
+          {
+            "id": "nature.animals.reptiles",
+            "title": "Reptiles",
+            "description": "Questions about reptiles, habitats, and traits."
+          },
+          {
+            "id": "nature.animals.birds",
+            "title": "Birds",
+            "description": "Questions about bird species, behavior, and identification."
+          }
+        ]
+      },
+      {
+        "id": "nature.dinosaurs",
+        "title": "Dinosaurs",
+        "description": "Questions about prehistoric creatures and fossil discoveries.",
+        "children": [
+          {
+            "id": "nature.dinosaurs.carnivores",
+            "title": "Carnivores",
+            "description": "Questions about meat-eating dinosaurs and predators."
+          },
+          {
+            "id": "nature.dinosaurs.herbivores",
+            "title": "Herbivores",
+            "description": "Questions about plant-eating dinosaurs and their traits."
+          },
+          {
+            "id": "nature.dinosaurs.fossils",
+            "title": "Fossils",
+            "description": "Questions about fossils, excavation, and prehistoric evidence."
+          }
+        ]
+      },
+      {
+        "id": "nature.plants",
+        "title": "Plants",
+        "description": "Questions about plant life, growth, and species.",
+        "children": [
+          {
+            "id": "nature.plants.trees",
+            "title": "Trees",
+            "description": "Questions about tree species, parts, and uses."
+          },
+          {
+            "id": "nature.plants.flowers",
+            "title": "Flowers",
+            "description": "Questions about flowering plants and identification."
+          },
+          {
+            "id": "nature.plants.agriculture",
+            "title": "Agriculture",
+            "description": "Questions about farming, crops, and plant cultivation."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fun_miscellaneous",
+    "title": "Fun & Miscellaneous",
+    "description": "Questions about fun facts, strange topics, riddles, and record-breaking achievements.",
+    "children": [
+      {
+        "id": "fun_miscellaneous.general_knowledge",
+        "title": "General Knowledge",
+        "description": "Questions covering a broad mix of everyday facts and trivia.",
+        "children": [
+          {
+            "id": "fun_miscellaneous.general_knowledge.random_facts",
+            "title": "Random Facts",
+            "description": "Questions about surprising facts from many topics."
+          },
+          {
+            "id": "fun_miscellaneous.general_knowledge.everyday_science",
+            "title": "Everyday Science",
+            "description": "Questions about common science seen in daily life."
+          },
+          {
+            "id": "fun_miscellaneous.general_knowledge.odd_facts",
+            "title": "Odd Facts",
+            "description": "Questions about unusual and curious pieces of trivia."
+          }
+        ]
+      },
+      {
+        "id": "fun_miscellaneous.strange_history",
+        "title": "Strange History",
+        "description": "Questions about bizarre historical events and strange true stories.",
+        "children": [
+          {
+            "id": "fun_miscellaneous.strange_history.weird_records",
+            "title": "Weird Records",
+            "description": "Questions about unusual record-setting events and people."
+          }
+        ]
+      },
+      {
+        "id": "fun_miscellaneous.riddles",
+        "title": "Riddles",
+        "description": "Questions that challenge reasoning, wordplay, and puzzle solving.",
+        "children": [
+          {
+            "id": "fun_miscellaneous.riddles.logic_riddles",
+            "title": "Logic Riddles",
+            "description": "Questions that test reasoning and deduction."
+          },
+          {
+            "id": "fun_miscellaneous.riddles.word_riddles",
+            "title": "Word Riddles",
+            "description": "Questions based on wordplay, meaning, and clever phrasing."
+          }
+        ]
+      },
+      {
+        "id": "fun_miscellaneous.world_records",
+        "title": "World Records",
+        "description": "Questions about record-breaking achievements and extremes.",
+        "children": [
+          {
+            "id": "fun_miscellaneous.world_records.guinness_records",
+            "title": "Guinness Records",
+            "description": "Questions about official Guinness World Records."
+          },
+          {
+            "id": "fun_miscellaneous.world_records.sports_records",
+            "title": "Sports Records",
+            "description": "Questions about major records in sports history."
+          }
+        ]
+      }
+    ]
+  }
+]
