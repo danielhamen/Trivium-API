@@ -1,3 +1,5 @@
+from datetime import date, datetime
+
 from pydantic import BaseModel, Field
 
 from app.models import Difficulty
@@ -19,6 +21,7 @@ class CategoryRefOut(BaseModel):
 class OptionOut(BaseModel):
     text: str
     is_correct: bool
+    explanation: bool | None = None
 
 
 class HintOut(BaseModel):
@@ -34,6 +37,13 @@ class QuestionOut(BaseModel):
     options: list[OptionOut] = Field(default_factory=list)
     hints: list[HintOut] = Field(default_factory=list)
     explanation: str | None = None
+    created_on: date | None = None
+    created_by: str | None = None
+    shuffle_options: bool = True
+    sources: list[str] = Field(default_factory=list)
+    updated_at: datetime | None = None
+    is_active: bool = True
+    allow_multiple_answers: bool = False
 
 
 class QuestionPublicOut(BaseModel):
@@ -44,6 +54,13 @@ class QuestionPublicOut(BaseModel):
     options: list[OptionOut] = Field(default_factory=list)
     hints: list[HintOut] = Field(default_factory=list)
     explanation: str | None = None
+    created_on: date | None = None
+    created_by: str | None = None
+    shuffle_options: bool = True
+    sources: list[str] = Field(default_factory=list)
+    updated_at: datetime | None = None
+    is_active: bool = True
+    allow_multiple_answers: bool = False
 
 
 class StatsOut(BaseModel):
