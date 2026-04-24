@@ -1,5 +1,6 @@
 import json
 import random
+from datetime import date, datetime
 from pathlib import Path
 from dataclasses import dataclass, field
 from typing import Any, Optional
@@ -111,6 +112,50 @@ class DataRepository:
         if len(hints) > 3:
             raise ValueError("MAX 3 hints allowed")
 
+        created_on_raw = obj.get("created_on")
+        created_on: Optional[date] = None
+        if created_on_raw is not None:
+            if not isinstance(created_on_raw, str):
+                raise TypeError("created_on must be an ISO date string or null")
+            try:
+                created_on = date.fromisoformat(created_on_raw)
+            except ValueError as exc:
+                raise ValueError("created_on must be in ISO format YYYY-MM-DD") from exc
+
+        created_by = obj.get("created_by")
+        if created_by is not None and not isinstance(created_by, str):
+            raise TypeError("created_by must be a string or null")
+
+        shuffle_options = obj.get("shuffle_options", True)
+        if not isinstance(shuffle_options, bool):
+            raise TypeError("shuffle_options must be a bool")
+
+        sources_raw = obj.get("sources", [])
+        if not isinstance(sources_raw, list) or not all(
+            isinstance(x, str) for x in sources_raw
+        ):
+            raise TypeError("sources must be a list of strings")
+
+        updated_at_raw = obj.get("updated_at")
+        updated_at: Optional[datetime] = None
+        if updated_at_raw is not None:
+            if not isinstance(updated_at_raw, str):
+                raise TypeError("updated_at must be an ISO datetime string or null")
+            try:
+                updated_at = datetime.fromisoformat(updated_at_raw)
+            except ValueError as exc:
+                raise ValueError(
+                    "updated_at must be in ISO 8601 datetime format"
+                ) from exc
+
+        is_active = obj.get("is_active", True)
+        if not isinstance(is_active, bool):
+            raise TypeError("is_active must be a bool")
+
+        allow_multiple_answers = obj.get("allow_multiple_answers", False)
+        if not isinstance(allow_multiple_answers, bool):
+            raise TypeError("allow_multiple_answers must be a bool")
+
         return Question(
             id=id_,
             question=question_text,
@@ -120,6 +165,13 @@ class DataRepository:
             options=options,
             hints=hints,
             explanation=explanation,
+            created_on=created_on,
+            created_by=created_by,
+            shuffle_options=shuffle_options,
+            sources=sources_raw,
+            updated_at=updated_at,
+            is_active=is_active,
+            allow_multiple_answers=allow_multiple_answers,
         )
 
     def _parse_hint(self, obj: Any) -> Hint:
@@ -134,7 +186,16 @@ class DataRepository:
             raise TypeError("option text must be a string")
         if "is_correct" not in obj or not isinstance(obj["is_correct"], bool):
             raise TypeError("option is_correct must be a bool")
-        return Option(text=obj["text"], is_correct=obj["is_correct"])
+
+        option_explanation = obj.get("explanation")
+        if option_explanation is not None and not isinstance(option_explanation, bool):
+            raise TypeError("option explanation must be a bool or null")
+
+        return Option(
+            text=obj["text"],
+            is_correct=obj["is_correct"],
+            explanation=option_explanation,
+        )
 
     def get_all_categories(self) -> list[Category]:
         return self._flatten_categories(self.categories)
