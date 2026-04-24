@@ -51,7 +51,7 @@ def test_question_ids_are_unique(questions_json):
 
 
 def test_questions_have_required_fields(questions_json):
-    required = {"id", "categories", "question", "difficulty", "correct_answer"}
+    required = {"id", "topic", "categories", "question", "difficulty", "correct_answer"}
 
     for q in questions_json:
         assert required.issubset(q.keys())
@@ -59,6 +59,8 @@ def test_questions_have_required_fields(questions_json):
         assert q["id"].strip() != ""
         assert isinstance(q["question"], str)
         assert q["question"].strip() != ""
+        assert isinstance(q["topic"], str)
+        assert q["topic"].strip() != ""
         assert isinstance(q["categories"], list)
         assert isinstance(q["correct_answer"], str)
         assert q["correct_answer"].strip() != ""

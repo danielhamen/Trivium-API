@@ -18,6 +18,18 @@ class CategoryRefOut(BaseModel):
     description: str | None = None
 
 
+class TopicOut(BaseModel):
+    id: str
+    title: str
+    description: str | None = None
+
+
+class TopicRefOut(BaseModel):
+    id: str
+    title: str
+    description: str | None = None
+
+
 class OptionOut(BaseModel):
     text: str
     is_correct: bool
@@ -31,6 +43,7 @@ class HintOut(BaseModel):
 class QuestionOut(BaseModel):
     id: str
     question: str
+    topic: TopicRefOut
     categories: list[CategoryRefOut]
     difficulty: Difficulty
     correct_answer: str
@@ -49,6 +62,7 @@ class QuestionOut(BaseModel):
 class QuestionPublicOut(BaseModel):
     id: str
     question: str
+    topic: TopicRefOut
     categories: list[CategoryRefOut]
     difficulty: Difficulty
     options: list[OptionOut] = Field(default_factory=list)
@@ -72,6 +86,7 @@ class CategoryCreateIn(BaseModel):
     id: str
     title: str
     description: str | None = None
+    topic_id: str | None = None
     parent_id: str | None = None
 
 
@@ -89,24 +104,38 @@ class OptionIn(BaseModel):
 class QuestionUpsertIn(BaseModel):
     id: str
     question: str
+    topic_id: str
     category_ids: list[str]
     difficulty: Difficulty
     correct_answer: str
     options: list[OptionIn] = Field(default_factory=list)
     hints: list[str] = Field(default_factory=list)
     explanation: str | None = None
+    created_on: date | None = None
+    created_by: str | None = None
+    shuffle_options: bool = True
+    sources: list[str] = Field(default_factory=list)
+    updated_at: datetime | None = None
     is_active: bool = True
+    allow_multiple_answers: bool = False
 
 
 class QuestionUpdateIn(BaseModel):
     question: str
+    topic_id: str
     category_ids: list[str]
     difficulty: Difficulty
     correct_answer: str
     options: list[OptionIn] = Field(default_factory=list)
     hints: list[str] = Field(default_factory=list)
     explanation: str | None = None
+    created_on: date | None = None
+    created_by: str | None = None
+    shuffle_options: bool = True
+    sources: list[str] = Field(default_factory=list)
+    updated_at: datetime | None = None
     is_active: bool = True
+    allow_multiple_answers: bool = False
 
 
 class ReportCreateIn(BaseModel):
@@ -127,6 +156,17 @@ class ReportOut(BaseModel):
 
 class ReportStatusUpdateIn(BaseModel):
     status: str
+
+
+class TopicCreateIn(BaseModel):
+    id: str
+    title: str
+    description: str | None = None
+
+
+class TopicUpdateIn(BaseModel):
+    title: str
+    description: str | None = None
 
 
 class AdminAnalyticsOut(BaseModel):

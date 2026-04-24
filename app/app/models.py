@@ -28,6 +28,13 @@ class Category:
 
 
 @dataclass
+class Topic:
+    id: str
+    title: str
+    description: Optional[str] = None
+
+
+@dataclass
 class Option:
     text: str
     is_correct: bool
@@ -43,6 +50,7 @@ class Hint:
 class Question:
     id: str
     question: str
+    topic: Topic
     categories: list[Category]
     difficulty: Difficulty
     correct_answer: str

@@ -12,6 +12,7 @@ from app.schemas import (
     AdminAnalyticsOut,
     CategoryCreateIn,
     CategoryOut,
+    TopicOut,
     CategoryUpdateIn,
     QuestionOut,
     QuestionPublicOut,
@@ -21,6 +22,8 @@ from app.schemas import (
     ReportOut,
     ReportStatusUpdateIn,
     StatsOut,
+    TopicCreateIn,
+    TopicUpdateIn,
 )
 
 repo = DataRepository()
@@ -83,6 +86,13 @@ def get_stats(repository: Annotated[DataRepository, Depends(get_repo)]):
         question_count=repository.count_questions(),
         category_count=len(repository.get_all_categories()),
     )
+
+
+@app.get("/topics", response_model=list[TopicOut])
+def get_topics(
+    repository: Annotated[DataRepository, Depends(get_repo)] = None,
+):
+    return repository.get_all_topics()
 
 
 @app.get("/categories", response_model=list[CategoryOut])
@@ -285,12 +295,20 @@ def admin_create_question(
         return repository.create_question(
             id=payload.id,
             question=payload.question,
+            topic_id=payload.topic_id,
             category_ids=payload.category_ids,
             difficulty=payload.difficulty,
             correct_answer=payload.correct_answer,
             options=[option.model_dump() for option in payload.options],
             hints=payload.hints,
             explanation=payload.explanation,
+            created_on=payload.created_on,
+            created_by=payload.created_by,
+            shuffle_options=payload.shuffle_options,
+            sources=payload.sources,
+            updated_at=payload.updated_at,
+            is_active=payload.is_active,
+            allow_multiple_answers=payload.allow_multiple_answers,
         )
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
@@ -306,13 +324,20 @@ def admin_update_question(
         return repository.update_question(
             question_id=question_id,
             question=payload.question,
+            topic_id=payload.topic_id,
             category_ids=payload.category_ids,
             difficulty=payload.difficulty,
             correct_answer=payload.correct_answer,
             options=[option.model_dump() for option in payload.options],
             hints=payload.hints,
             explanation=payload.explanation,
+            created_on=payload.created_on,
+            created_by=payload.created_by,
+            shuffle_options=payload.shuffle_options,
+            sources=payload.sources,
+            updated_at=payload.updated_at,
             is_active=payload.is_active,
+            allow_multiple_answers=payload.allow_multiple_answers,
         )
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
@@ -336,6 +361,55 @@ def admin_list_categories(
     return repository.categories
 
 
+@app.get("/admin/api/topics", response_model=list[TopicOut])
+def admin_list_topics(
+    repository: Annotated[DataRepository, Depends(get_repo)],
+):
+    return repository.get_all_topics()
+
+
+@app.post("/admin/api/topics", response_model=TopicOut, status_code=201)
+def admin_create_topic(
+    payload: TopicCreateIn,
+    repository: Annotated[DataRepository, Depends(get_repo)],
+):
+    try:
+        return repository.create_topic(
+            id=payload.id,
+            title=payload.title,
+            description=payload.description,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@app.put("/admin/api/topics/{topic_id}", response_model=TopicOut)
+def admin_update_topic(
+    topic_id: str,
+    payload: TopicUpdateIn,
+    repository: Annotated[DataRepository, Depends(get_repo)],
+):
+    try:
+        return repository.update_topic(
+            topic_id,
+            title=payload.title,
+            description=payload.description,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+
+
+@app.delete("/admin/api/topics/{topic_id}", status_code=204)
+def admin_delete_topic(
+    topic_id: str,
+    repository: Annotated[DataRepository, Depends(get_repo)],
+):
+    try:
+        repository.delete_topic(topic_id)
+    except ValueError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+
+
 @app.post("/admin/api/categories", response_model=CategoryOut, status_code=201)
 def admin_create_category(
     payload: CategoryCreateIn,
@@ -346,6 +420,7 @@ def admin_create_category(
             id=payload.id,
             title=payload.title,
             description=payload.description,
+            topic_id=payload.topic_id,
             parent_id=payload.parent_id,
         )
     except ValueError as exc:

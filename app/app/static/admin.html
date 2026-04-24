@@ -9,7 +9,7 @@
   <body>
     <header>
       <h1>Trivia Admin Dashboard</h1>
-      <p>MVP admin for categories, questions, reports, and analytics.</p>
+      <p>Manage Topics → Categories → Subcategories and full Question metadata.</p>
     </header>
 
     <main>
@@ -21,35 +21,59 @@
 
       <section class="card two-col">
         <div>
+          <h2>Topics</h2>
+          <form id="topic-form">
+            <input name="id" placeholder="Topic ID" required />
+            <input name="title" placeholder="Topic Title" required />
+            <textarea name="description" placeholder="Topic Description"></textarea>
+            <button type="submit">Add Topic</button>
+          </form>
+          <ul id="topic-list"></ul>
+        </div>
+
+        <div>
           <h2>Categories</h2>
           <form id="category-form">
             <input name="id" placeholder="Category ID" required />
             <input name="title" placeholder="Title" required />
-            <input name="description" placeholder="Description" />
-            <input name="parent_id" placeholder="Parent ID (optional)" />
+            <textarea name="description" placeholder="Description"></textarea>
+            <input name="topic_id" placeholder="Topic ID (required when no parent)" />
+            <input name="parent_id" placeholder="Parent Category ID (optional)" />
             <button type="submit">Add Category</button>
           </form>
-          <ul id="category-list"></ul>
+          <div id="category-list"></div>
         </div>
+      </section>
 
-        <div>
-          <h2>Questions</h2>
-          <form id="question-form">
-            <input name="id" placeholder="Question ID" required />
-            <textarea name="question" placeholder="Question text" required></textarea>
-            <input name="category_ids" placeholder="Category IDs (comma separated)" required />
-            <select name="difficulty" required>
-              <option value="easy">easy</option>
-              <option value="medium">medium</option>
-              <option value="hard">hard</option>
-            </select>
-            <input name="correct_answer" placeholder="Correct answer" required />
-            <input name="explanation" placeholder="Explanation" />
-            <input name="hints" placeholder="Hints (comma separated)" />
-            <button type="submit">Add Question</button>
-          </form>
-          <ul id="question-list"></ul>
-        </div>
+      <section class="card">
+        <h2>Questions</h2>
+        <form id="question-form" class="question-grid">
+          <input name="id" placeholder="Question ID" required />
+          <input name="topic_id" placeholder="Topic ID" required />
+          <select name="difficulty" required>
+            <option value="easy">easy</option>
+            <option value="medium">medium</option>
+            <option value="hard">hard</option>
+          </select>
+          <input name="created_by" placeholder="Created By" />
+          <input name="created_on" type="date" />
+          <input name="updated_at" type="datetime-local" />
+
+          <textarea name="question" placeholder="Question text" required class="span-all"></textarea>
+          <input name="category_ids" placeholder="Category IDs (comma separated)" required class="span-all" />
+          <input name="correct_answer" placeholder="Correct answer" required class="span-all" />
+          <input name="hints" placeholder="Hints (comma separated)" class="span-all" />
+          <input name="sources" placeholder="Sources (comma separated URLs/text)" class="span-all" />
+          <textarea name="explanation" placeholder="Question explanation" class="span-all"></textarea>
+          <textarea name="options_json" placeholder='Options JSON (optional): [{"text":"A","is_correct":true,"explanation":false}]' class="span-all"></textarea>
+
+          <label><input type="checkbox" name="shuffle_options" checked /> Shuffle options</label>
+          <label><input type="checkbox" name="is_active" checked /> Is active</label>
+          <label><input type="checkbox" name="allow_multiple_answers" /> Allow multiple answers</label>
+
+          <button type="submit" class="span-all">Add Question</button>
+        </form>
+        <ul id="question-list"></ul>
       </section>
 
       <section class="card">
@@ -58,12 +82,6 @@
         <ul id="report-list"></ul>
       </section>
     </main>
-
-    <template id="status-buttons-template">
-      <button data-status="open">Open</button>
-      <button data-status="resolved">Resolve</button>
-      <button data-status="ignored">Ignore</button>
-    </template>
 
     <script src="/admin/static/admin.js"></script>
   </body>

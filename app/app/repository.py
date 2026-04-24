@@ -6,19 +6,30 @@ from dataclasses import dataclass, field
 from typing import Any, Optional
 from uuid import uuid4
 
-from app.models import Category, Difficulty, Hint, Option, Question
+from app.models import Category, Difficulty, Hint, Option, Question, Topic
 
 
 @dataclass
 class DataRepository:
+    topics: list[Topic] = field(default_factory=list)
     categories: list[Category] = field(default_factory=list)
     questions: list[Question] = field(default_factory=list)
     reports: list[dict[str, Any]] = field(default_factory=list)
 
     def fetch(self) -> "DataRepository":
         data_dir = Path(__file__).resolve().parent.parent / "data"
+        topic_path = data_dir / "topics.json"
         category_path = data_dir / "categories.json"
         question_path = data_dir / "questions.json"
+
+        if topic_path.exists():
+            with topic_path.open("r", encoding="utf-8") as file:
+                topic_obj = json.load(file)
+            if not isinstance(topic_obj, list):
+                raise TypeError("topics.json must contain a list")
+            self.topics = [self._parse_topic(x) for x in topic_obj]
+        else:
+            self.topics = []
 
         with category_path.open("r", encoding="utf-8") as file:
             category_obj = json.load(file)
@@ -32,8 +43,35 @@ class DataRepository:
             raise TypeError("questions.json must contain a list")
 
         self.categories = [self._parse_category(x) for x in category_obj]
+        if not self.topics:
+            self.topics = [
+                Topic(id=c.id, title=c.title, description=c.description)
+                for c in self.categories
+            ]
         self.questions = [self._parse_question(x) for x in question_obj]
         return self
+
+
+    def _parse_topic(self, obj: Any) -> Topic:
+        if not isinstance(obj, dict):
+            raise TypeError("topic must be an object")
+        if "id" not in obj:
+            raise ValueError("topic missing `id`")
+        if "title" not in obj:
+            raise ValueError("topic missing `title`")
+
+        id_ = obj["id"]
+        title = obj["title"]
+        description = obj.get("description")
+
+        if not isinstance(id_, str):
+            raise TypeError("topic id must be a string")
+        if not isinstance(title, str):
+            raise TypeError("topic title must be a string")
+        if description is not None and not isinstance(description, str):
+            raise TypeError("topic description must be a string or null")
+
+        return Topic(id=id_, title=title, description=description)
 
     def _parse_category(self, obj: Any) -> Category:
         if not isinstance(obj, dict):
@@ -93,6 +131,18 @@ class DataRepository:
         ):
             raise TypeError("question categories must be a list of strings")
         categories = [self.get_category_by_id(x) for x in category_ids]
+
+        topic_id = obj.get("topic")
+        if topic_id is None:
+            topic_id = self._infer_topic_id_from_category_ids(category_ids)
+        if not isinstance(topic_id, str):
+            raise TypeError("question topic must be a string")
+        topic = self.get_topic_by_id(topic_id)
+
+        if any(not self._category_belongs_to_topic(c.id, topic.id) for c in categories):
+            raise ValueError(
+                f"all question categories must belong to topic: {topic.id}"
+            )
 
         explanation = obj.get("explanation")
         if explanation is not None and not isinstance(explanation, str):
@@ -161,6 +211,7 @@ class DataRepository:
         return Question(
             id=id_,
             question=question_text,
+            topic=topic,
             categories=categories,
             difficulty=difficulty,
             correct_answer=correct_answer,
@@ -217,6 +268,29 @@ class DataRepository:
 
     def try_get_category_by_id(self, id: str) -> Optional[Category]:
         return self._find_category_recursive(self.categories, id)
+
+    def get_all_topics(self) -> list[Topic]:
+        return list(self.topics)
+
+    def get_topic_by_id(self, id: str) -> Topic:
+        for topic in self.topics:
+            if topic.id == id:
+                return topic
+        raise ValueError(f"topic not found: {id}")
+
+    def try_get_topic_by_id(self, id: str) -> Optional[Topic]:
+        for topic in self.topics:
+            if topic.id == id:
+                return topic
+        return None
+
+    def _infer_topic_id_from_category_ids(self, category_ids: list[str]) -> str:
+        if not category_ids:
+            raise ValueError("question must contain at least one category")
+        return category_ids[0].split(".")[0]
+
+    def _category_belongs_to_topic(self, category_id: str, topic_id: str) -> bool:
+        return category_id == topic_id or category_id.startswith(f"{topic_id}.")
 
     def find_categories_by_title(
         self,
@@ -400,20 +474,73 @@ class DataRepository:
         id: str,
         title: str,
         description: str | None = None,
+        topic_id: str | None = None,
         parent_id: str | None = None,
     ) -> Category:
         if self.try_get_category_by_id(id):
             raise ValueError(f"category already exists: {id}")
         category = Category(id=id, title=title, description=description)
         if parent_id is None:
-            self.categories.append(category)
+            if topic_id is None:
+                raise ValueError("topic_id is required when parent_id is not set")
+            self.get_topic_by_id(topic_id)
+            if not self._category_belongs_to_topic(id, topic_id):
+                raise ValueError("category id must be prefixed by topic id")
+            topic_root = self.try_get_category_by_id(topic_id)
+            if topic_root is None:
+                topic_root = Category(id=topic_id, title=topic_id.title())
+                self.categories.append(topic_root)
+            topic_root.children.append(category)
             return category
 
         parent = self.try_get_category_by_id(parent_id)
         if parent is None:
             raise ValueError(f"parent category not found: {parent_id}")
+        if topic_id is not None and not self._category_belongs_to_topic(parent.id, topic_id):
+            raise ValueError("parent category does not belong to the given topic")
         parent.children.append(category)
         return category
+
+    def create_topic(
+        self,
+        *,
+        id: str,
+        title: str,
+        description: str | None = None,
+    ) -> Topic:
+        if self.try_get_topic_by_id(id):
+            raise ValueError(f"topic already exists: {id}")
+        topic = Topic(id=id, title=title, description=description)
+        self.topics.append(topic)
+        if self.try_get_category_by_id(id) is None:
+            self.categories.append(Category(id=id, title=title, description=description))
+        return topic
+
+    def update_topic(
+        self,
+        topic_id: str,
+        *,
+        title: str,
+        description: str | None = None,
+    ) -> Topic:
+        topic = self.try_get_topic_by_id(topic_id)
+        if topic is None:
+            raise ValueError(f"topic not found: {topic_id}")
+        topic.title = title
+        topic.description = description
+        topic_root = self.try_get_category_by_id(topic_id)
+        if topic_root is not None:
+            topic_root.title = title
+            topic_root.description = description
+        return topic
+
+    def delete_topic(self, topic_id: str) -> None:
+        topic = self.try_get_topic_by_id(topic_id)
+        if topic is None:
+            raise ValueError(f"topic not found: {topic_id}")
+        self.topics = [t for t in self.topics if t.id != topic_id]
+        self.categories = self._remove_category_recursive(self.categories, topic_id)
+        self.questions = [q for q in self.questions if q.topic.id != topic_id]
 
     def update_category(
         self,
@@ -460,29 +587,46 @@ class DataRepository:
         *,
         id: str,
         question: str,
+        topic_id: str,
         category_ids: list[str],
         difficulty: Difficulty,
         correct_answer: str,
         options: list[dict[str, Any]] | None = None,
         hints: list[str] | None = None,
         explanation: str | None = None,
+        created_on: date | None = None,
+        created_by: str | None = None,
+        shuffle_options: bool = True,
+        sources: list[str] | None = None,
+        updated_at: datetime | None = None,
+        is_active: bool = True,
+        allow_multiple_answers: bool = False,
     ) -> Question:
         if self.try_get_question_by_id(id):
             raise ValueError(f"question already exists: {id}")
+        topic = self.get_topic_by_id(topic_id)
         categories = [self.get_category_by_id(category_id) for category_id in category_ids]
+        if any(not self._category_belongs_to_topic(c.id, topic.id) for c in categories):
+            raise ValueError(f"all categories must belong to topic: {topic.id}")
         parsed_options = [self._parse_option(option) for option in (options or [])]
         parsed_hints = [self._parse_hint(hint) for hint in (hints or [])]
         question_model = Question(
             id=id,
             question=question,
+            topic=topic,
             categories=categories,
             difficulty=difficulty,
             correct_answer=correct_answer,
             options=parsed_options,
             hints=parsed_hints,
             explanation=explanation,
-            created_on=date.today(),
-            updated_at=datetime.utcnow(),
+            created_on=created_on or date.today(),
+            created_by=created_by,
+            shuffle_options=shuffle_options,
+            sources=sources or [],
+            updated_at=updated_at or datetime.utcnow(),
+            is_active=is_active,
+            allow_multiple_answers=allow_multiple_answers,
         )
         self.questions.append(question_model)
         return question_model
@@ -492,26 +636,43 @@ class DataRepository:
         question_id: str,
         *,
         question: str,
+        topic_id: str,
         category_ids: list[str],
         difficulty: Difficulty,
         correct_answer: str,
         options: list[dict[str, Any]] | None = None,
         hints: list[str] | None = None,
         explanation: str | None = None,
+        created_on: date | None = None,
+        created_by: str | None = None,
+        shuffle_options: bool = True,
+        sources: list[str] | None = None,
+        updated_at: datetime | None = None,
         is_active: bool = True,
+        allow_multiple_answers: bool = False,
     ) -> Question:
         found = self.try_get_question_by_id(question_id)
         if found is None:
             raise ValueError(f"question not found: {question_id}")
+        topic = self.get_topic_by_id(topic_id)
+        categories = [self.get_category_by_id(category_id) for category_id in category_ids]
+        if any(not self._category_belongs_to_topic(c.id, topic.id) for c in categories):
+            raise ValueError(f"all categories must belong to topic: {topic.id}")
         found.question = question
-        found.categories = [self.get_category_by_id(category_id) for category_id in category_ids]
+        found.topic = topic
+        found.categories = categories
         found.difficulty = difficulty
         found.correct_answer = correct_answer
         found.options = [self._parse_option(option) for option in (options or [])]
         found.hints = [self._parse_hint(hint) for hint in (hints or [])]
         found.explanation = explanation
+        found.created_on = created_on or found.created_on
+        found.created_by = created_by
+        found.shuffle_options = shuffle_options
+        found.sources = sources or []
         found.is_active = is_active
-        found.updated_at = datetime.utcnow()
+        found.allow_multiple_answers = allow_multiple_answers
+        found.updated_at = updated_at or datetime.utcnow()
         return found
 
     def delete_question(self, question_id: str) -> None:

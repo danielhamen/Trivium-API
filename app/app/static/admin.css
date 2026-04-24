@@ -1,81 +1,128 @@
 :root {
-  --bg: #f8fafc;
+  --bg: #f4f7fb;
   --card: #ffffff;
   --text: #0f172a;
   --muted: #64748b;
   --accent: #2563eb;
-  --border: #e2e8f0;
+  --border: #dbe4f0;
 }
 
 * { box-sizing: border-box; }
+
 body {
   margin: 0;
   font-family: Inter, system-ui, -apple-system, sans-serif;
   color: var(--text);
   background: var(--bg);
 }
+
 header {
-  background: linear-gradient(135deg, #1d4ed8, #0ea5e9);
-  color: white;
-  padding: 24px;
+  background: linear-gradient(135deg, #1d4ed8, #0284c7);
+  color: #fff;
+  padding: 28px;
 }
+
+header h1 { margin: 0; }
+
 main {
   padding: 20px;
   display: grid;
   gap: 16px;
 }
+
 .card {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 16px;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.05);
 }
+
 .two-col {
   display: grid;
   gap: 16px;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
 }
+
+.question-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 8px;
+}
+
+.span-all {
+  grid-column: 1 / -1;
+}
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   gap: 10px;
 }
+
 .stat {
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 10px;
 }
-.stat strong { display: block; font-size: 1.3rem; }
+
+.stat strong {
+  display: block;
+  font-size: 1.3rem;
+}
+
 form {
   display: grid;
   gap: 8px;
   margin-bottom: 12px;
 }
-input, textarea, select, button {
+
+input,
+textarea,
+select,
+button {
   border: 1px solid var(--border);
   padding: 8px 10px;
   border-radius: 8px;
   font: inherit;
 }
+
+textarea {
+  min-height: 72px;
+  resize: vertical;
+}
+
 button {
   background: var(--accent);
-  color: white;
+  color: #fff;
   cursor: pointer;
 }
-ul { list-style: none; margin: 0; padding: 0; }
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 li {
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 10px;
   margin-bottom: 8px;
+  background: #fff;
 }
+
 .inline-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
   margin-top: 8px;
 }
-.inline-actions button { background: #334155; }
+
+.inline-actions button {
+  background: #334155;
+}
+
 pre {
   margin-top: 12px;
   max-height: 220px;
@@ -84,4 +131,19 @@ pre {
   padding: 12px;
   border-radius: 8px;
 }
-.muted { color: var(--muted); }
+
+.muted {
+  color: var(--muted);
+}
+
+details {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px;
+  margin-bottom: 8px;
+  background: #f8fafc;
+}
+
+summary {
+  cursor: pointer;
+}
