@@ -4,6 +4,7 @@ from datetime import date, datetime
 from pathlib import Path
 from dataclasses import dataclass, field
 from typing import Any, Optional
+from uuid import uuid4
 
 from app.models import Category, Difficulty, Hint, Option, Question
 
@@ -12,6 +13,7 @@ from app.models import Category, Difficulty, Hint, Option, Question
 class DataRepository:
     categories: list[Category] = field(default_factory=list)
     questions: list[Question] = field(default_factory=list)
+    reports: list[dict[str, Any]] = field(default_factory=list)
 
     def fetch(self) -> "DataRepository":
         data_dir = Path(__file__).resolve().parent.parent / "data"
@@ -391,3 +393,160 @@ class DataRepository:
         if not questions:
             raise ValueError("no questions matched the given filters")
         return random.choice(questions)
+
+    def create_category(
+        self,
+        *,
+        id: str,
+        title: str,
+        description: str | None = None,
+        parent_id: str | None = None,
+    ) -> Category:
+        if self.try_get_category_by_id(id):
+            raise ValueError(f"category already exists: {id}")
+        category = Category(id=id, title=title, description=description)
+        if parent_id is None:
+            self.categories.append(category)
+            return category
+
+        parent = self.try_get_category_by_id(parent_id)
+        if parent is None:
+            raise ValueError(f"parent category not found: {parent_id}")
+        parent.children.append(category)
+        return category
+
+    def update_category(
+        self,
+        category_id: str,
+        *,
+        title: str,
+        description: str | None = None,
+    ) -> Category:
+        category = self.try_get_category_by_id(category_id)
+        if category is None:
+            raise ValueError(f"category not found: {category_id}")
+        category.title = title
+        category.description = description
+        return category
+
+    def delete_category(self, category_id: str) -> None:
+        category = self.try_get_category_by_id(category_id)
+        if category is None:
+            raise ValueError(f"category not found: {category_id}")
+        descendants = self._flatten_categories([category])
+        deleted_ids = {c.id for c in descendants}
+        self.categories = self._remove_category_recursive(self.categories, category_id)
+        self.questions = [
+            q
+            for q in self.questions
+            if not any(c.id in deleted_ids for c in q.categories)
+        ]
+
+    def _remove_category_recursive(
+        self, categories: list[Category], category_id: str
+    ) -> list[Category]:
+        result: list[Category] = []
+        for category in categories:
+            if category.id == category_id:
+                continue
+            category.children = self._remove_category_recursive(
+                category.children, category_id
+            )
+            result.append(category)
+        return result
+
+    def create_question(
+        self,
+        *,
+        id: str,
+        question: str,
+        category_ids: list[str],
+        difficulty: Difficulty,
+        correct_answer: str,
+        options: list[dict[str, Any]] | None = None,
+        hints: list[str] | None = None,
+        explanation: str | None = None,
+    ) -> Question:
+        if self.try_get_question_by_id(id):
+            raise ValueError(f"question already exists: {id}")
+        categories = [self.get_category_by_id(category_id) for category_id in category_ids]
+        parsed_options = [self._parse_option(option) for option in (options or [])]
+        parsed_hints = [self._parse_hint(hint) for hint in (hints or [])]
+        question_model = Question(
+            id=id,
+            question=question,
+            categories=categories,
+            difficulty=difficulty,
+            correct_answer=correct_answer,
+            options=parsed_options,
+            hints=parsed_hints,
+            explanation=explanation,
+            created_on=date.today(),
+            updated_at=datetime.utcnow(),
+        )
+        self.questions.append(question_model)
+        return question_model
+
+    def update_question(
+        self,
+        question_id: str,
+        *,
+        question: str,
+        category_ids: list[str],
+        difficulty: Difficulty,
+        correct_answer: str,
+        options: list[dict[str, Any]] | None = None,
+        hints: list[str] | None = None,
+        explanation: str | None = None,
+        is_active: bool = True,
+    ) -> Question:
+        found = self.try_get_question_by_id(question_id)
+        if found is None:
+            raise ValueError(f"question not found: {question_id}")
+        found.question = question
+        found.categories = [self.get_category_by_id(category_id) for category_id in category_ids]
+        found.difficulty = difficulty
+        found.correct_answer = correct_answer
+        found.options = [self._parse_option(option) for option in (options or [])]
+        found.hints = [self._parse_hint(hint) for hint in (hints or [])]
+        found.explanation = explanation
+        found.is_active = is_active
+        found.updated_at = datetime.utcnow()
+        return found
+
+    def delete_question(self, question_id: str) -> None:
+        before = len(self.questions)
+        self.questions = [q for q in self.questions if q.id != question_id]
+        if len(self.questions) == before:
+            raise ValueError(f"question not found: {question_id}")
+        self.reports = [report for report in self.reports if report["question_id"] != question_id]
+
+    def create_report(self, question_id: str, reason: str, notes: str | None = None) -> dict[str, Any]:
+        question = self.try_get_question_by_id(question_id)
+        if question is None:
+            raise ValueError(f"question not found: {question_id}")
+        report = {
+            "id": str(uuid4()),
+            "question_id": question_id,
+            "question_text": question.question,
+            "reason": reason,
+            "notes": notes,
+            "status": "open",
+            "created_at": datetime.utcnow().isoformat(),
+            "resolved_at": None,
+        }
+        self.reports.append(report)
+        return report
+
+    def list_reports(self) -> list[dict[str, Any]]:
+        return list(self.reports)
+
+    def update_report_status(self, report_id: str, status: str) -> dict[str, Any]:
+        for report in self.reports:
+            if report["id"] == report_id:
+                report["status"] = status
+                report["resolved_at"] = (
+                    datetime.utcnow().isoformat() if status == "resolved" else None
+                )
+                return report
+        raise ValueError(f"report not found: {report_id}")
