@@ -1,0 +1,92 @@
+[
+  {
+    "id": "geography",
+    "title": "Geography",
+    "description": "Questions about places, maps, regions, and the physical world."
+  },
+  {
+    "id": "history",
+    "title": "History",
+    "description": "Questions about historical periods, people, and major events."
+  },
+  {
+    "id": "politics_society",
+    "title": "Politics & Society",
+    "description": "Questions about government, society, political systems, and public life."
+  },
+  {
+    "id": "language_literature",
+    "title": "Language & Literature",
+    "description": "Questions about books, language, grammar, and word meaning."
+  },
+  {
+    "id": "mythology_religion",
+    "title": "Mythology & Religion",
+    "description": "Questions about myths, gods, legends, and world religions."
+  },
+  {
+    "id": "science",
+    "title": "Science",
+    "description": "Questions about scientific fields, ideas, and discoveries."
+  },
+  {
+    "id": "mathematics",
+    "title": "Mathematics",
+    "description": "Questions about numbers, patterns, equations, and mathematical reasoning."
+  },
+  {
+    "id": "technology",
+    "title": "Technology",
+    "description": "Questions about computers, programming, networks, and modern tech."
+  },
+  {
+    "id": "transportation",
+    "title": "Transportation",
+    "description": "Questions about vehicles, travel systems, and transportation history."
+  },
+  {
+    "id": "military",
+    "title": "Military",
+    "description": "Questions about warfare, armies, weapons, and military history."
+  },
+  {
+    "id": "sports",
+    "title": "Sports",
+    "description": "Questions about teams, players, leagues, and sports history."
+  },
+  {
+    "id": "entertainment",
+    "title": "Entertainment",
+    "description": "Questions about movies, television, anime, celebrities, and pop culture."
+  },
+  {
+    "id": "music",
+    "title": "Music",
+    "description": "Questions about songs, artists, albums, genres, and music history."
+  },
+  {
+    "id": "games",
+    "title": "Games",
+    "description": "Questions about video games, franchises, and tabletop games."
+  },
+  {
+    "id": "art_design",
+    "title": "Art & Design",
+    "description": "Questions about visual art, architecture, design, and fashion."
+  },
+  {
+    "id": "food_lifestyle",
+    "title": "Food & Lifestyle",
+    "description": "Questions about food, drinks, cuisine, and everyday lifestyle topics."
+  },
+  {
+    "id": "nature",
+    "title": "Nature",
+    "description": "Questions about animals, plants, fossils, and the natural world."
+  },
+  {
+    "id": "fun_miscellaneous",
+    "title": "Fun & Miscellaneous",
+    "description": "Questions about fun facts, strange topics, riddles, and record-breaking achievements."
+  }
+]

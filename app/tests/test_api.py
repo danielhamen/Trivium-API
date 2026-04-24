@@ -70,6 +70,7 @@ def test_get_questions(client):
         assert "id" in question
         assert "question" in question
         assert "correct_answer" not in question
+        assert "topic" in question
         assert isinstance(question["categories"], list)
         if question["categories"]:
             assert "children" not in question["categories"][0]
@@ -84,6 +85,7 @@ def test_get_all_questions_with_answers(client):
     if body:
         question = body[0]
         assert "correct_answer" in question
+        assert "topic" in question
         assert isinstance(question["categories"], list)
         if question["categories"]:
             assert "children" not in question["categories"][0]
@@ -189,6 +191,7 @@ def test_admin_create_and_delete_question(client):
     payload = {
         "id": "admin-test-question",
         "question": "Admin test question?",
+        "topic_id": category_id.split(".")[0],
         "category_ids": [category_id],
         "difficulty": "easy",
         "correct_answer": "yes",

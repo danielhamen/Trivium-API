@@ -9,10 +9,22 @@
     "question": "Which element has the chemical symbol 'K'?",
     "difficulty": "medium",
     "options": [
-      { "text": "Potassium", "is_correct": true },
-      { "text": "Krypton", "is_correct": false },
-      { "text": "Calcium", "is_correct": false },
-      { "text": "Cobalt", "is_correct": false }
+      {
+        "text": "Potassium",
+        "is_correct": true
+      },
+      {
+        "text": "Krypton",
+        "is_correct": false
+      },
+      {
+        "text": "Calcium",
+        "is_correct": false
+      },
+      {
+        "text": "Cobalt",
+        "is_correct": false
+      }
     ],
     "correct_answer": "Potassium",
     "hints": [
@@ -20,7 +32,8 @@
       "It is an alkali metal that reacts strongly with water.",
       "It is commonly found in bananas."
     ],
-    "explanation": "The symbol K comes from the Latin name Kalium. Potassium is an alkali metal in Group 1."
+    "explanation": "The symbol K comes from the Latin name Kalium. Potassium is an alkali metal in Group 1.",
+    "topic": "science"
   },
   {
     "id": "q012",
@@ -32,10 +45,22 @@
     "question": "Which element has the highest atomic number among naturally occurring elements?",
     "difficulty": "hard",
     "options": [
-      { "text": "Uranium", "is_correct": true },
-      { "text": "Plutonium", "is_correct": false },
-      { "text": "Radon", "is_correct": false },
-      { "text": "Thorium", "is_correct": false }
+      {
+        "text": "Uranium",
+        "is_correct": true
+      },
+      {
+        "text": "Plutonium",
+        "is_correct": false
+      },
+      {
+        "text": "Radon",
+        "is_correct": false
+      },
+      {
+        "text": "Thorium",
+        "is_correct": false
+      }
     ],
     "correct_answer": "Uranium",
     "hints": [
@@ -43,7 +68,8 @@
       "Its atomic number is 92.",
       "Its symbol is U."
     ],
-    "explanation": "Uranium is the naturally occurring element with the highest atomic number, 92."
+    "explanation": "Uranium is the naturally occurring element with the highest atomic number, 92.",
+    "topic": "science"
   },
   {
     "id": "q013",
@@ -55,10 +81,22 @@
     "question": "Which element is the main component of diamonds?",
     "difficulty": "easy",
     "options": [
-      { "text": "Carbon", "is_correct": true },
-      { "text": "Silicon", "is_correct": false },
-      { "text": "Calcium", "is_correct": false },
-      { "text": "Nitrogen", "is_correct": false }
+      {
+        "text": "Carbon",
+        "is_correct": true
+      },
+      {
+        "text": "Silicon",
+        "is_correct": false
+      },
+      {
+        "text": "Calcium",
+        "is_correct": false
+      },
+      {
+        "text": "Nitrogen",
+        "is_correct": false
+      }
     ],
     "correct_answer": "Carbon",
     "hints": [
@@ -66,7 +104,8 @@
       "It is the basis of organic chemistry.",
       "Its symbol is C."
     ],
-    "explanation": "Diamond is a crystalline form of pure carbon in which each atom is bonded to four others."
+    "explanation": "Diamond is a crystalline form of pure carbon in which each atom is bonded to four others.",
+    "topic": "science"
   },
   {
     "id": "q014",
@@ -78,10 +117,22 @@
     "question": "Which element has the chemical symbol 'Ag'?",
     "difficulty": "medium",
     "options": [
-      { "text": "Silver", "is_correct": true },
-      { "text": "Gold", "is_correct": false },
-      { "text": "Argon", "is_correct": false },
-      { "text": "Aluminum", "is_correct": false }
+      {
+        "text": "Silver",
+        "is_correct": true
+      },
+      {
+        "text": "Gold",
+        "is_correct": false
+      },
+      {
+        "text": "Argon",
+        "is_correct": false
+      },
+      {
+        "text": "Aluminum",
+        "is_correct": false
+      }
     ],
     "correct_answer": "Silver",
     "hints": [
@@ -89,7 +140,8 @@
       "It is a precious metal used in jewelry.",
       "It is commonly associated with mirrors and coins."
     ],
-    "explanation": "Ag is derived from Argentum, the Latin name for silver."
+    "explanation": "Ag is derived from Argentum, the Latin name for silver.",
+    "topic": "science"
   },
   {
     "id": "q015",
@@ -101,10 +153,22 @@
     "question": "Which group of elements is known for being chemically unreactive?",
     "difficulty": "easy",
     "options": [
-      { "text": "Noble gases", "is_correct": true },
-      { "text": "Alkali metals", "is_correct": false },
-      { "text": "Halogens", "is_correct": false },
-      { "text": "Transition metals", "is_correct": false }
+      {
+        "text": "Noble gases",
+        "is_correct": true
+      },
+      {
+        "text": "Alkali metals",
+        "is_correct": false
+      },
+      {
+        "text": "Halogens",
+        "is_correct": false
+      },
+      {
+        "text": "Transition metals",
+        "is_correct": false
+      }
     ],
     "correct_answer": "Noble gases",
     "hints": [
@@ -112,7 +176,8 @@
       "They have full valence electron shells.",
       "Examples include helium and neon."
     ],
-    "explanation": "Noble gases are largely unreactive because their outer electron shells are already full."
+    "explanation": "Noble gases are largely unreactive because their outer electron shells are already full.",
+    "topic": "science"
   },
   {
     "id": "q016",
@@ -124,10 +189,22 @@
     "question": "Which element has the chemical symbol 'Pb'?",
     "difficulty": "medium",
     "options": [
-      { "text": "Lead", "is_correct": true },
-      { "text": "Phosphorus", "is_correct": false },
-      { "text": "Palladium", "is_correct": false },
-      { "text": "Platinum", "is_correct": false }
+      {
+        "text": "Lead",
+        "is_correct": true
+      },
+      {
+        "text": "Phosphorus",
+        "is_correct": false
+      },
+      {
+        "text": "Palladium",
+        "is_correct": false
+      },
+      {
+        "text": "Platinum",
+        "is_correct": false
+      }
     ],
     "correct_answer": "Lead",
     "hints": [
@@ -135,7 +212,8 @@
       "It is a dense metal once commonly used in pipes.",
       "It is toxic and has been removed from gasoline and paint."
     ],
-    "explanation": "Pb comes from Plumbum, the Latin name for lead."
+    "explanation": "Pb comes from Plumbum, the Latin name for lead.",
+    "topic": "science"
   },
   {
     "id": "q017",
@@ -147,10 +225,22 @@
     "question": "Which element is required for the production of hemoglobin in blood?",
     "difficulty": "medium",
     "options": [
-      { "text": "Iron", "is_correct": true },
-      { "text": "Copper", "is_correct": false },
-      { "text": "Magnesium", "is_correct": false },
-      { "text": "Zinc", "is_correct": false }
+      {
+        "text": "Iron",
+        "is_correct": true
+      },
+      {
+        "text": "Copper",
+        "is_correct": false
+      },
+      {
+        "text": "Magnesium",
+        "is_correct": false
+      },
+      {
+        "text": "Zinc",
+        "is_correct": false
+      }
     ],
     "correct_answer": "Iron",
     "hints": [
@@ -158,7 +248,8 @@
       "Its deficiency can cause anemia.",
       "Its symbol is Fe."
     ],
-    "explanation": "Iron is part of the heme group in hemoglobin and is necessary for oxygen transport in blood."
+    "explanation": "Iron is part of the heme group in hemoglobin and is necessary for oxygen transport in blood.",
+    "topic": "science"
   },
   {
     "id": "q018",
@@ -170,10 +261,22 @@
     "question": "Which element is located directly below oxygen in the periodic table?",
     "difficulty": "hard",
     "options": [
-      { "text": "Sulfur", "is_correct": true },
-      { "text": "Selenium", "is_correct": false },
-      { "text": "Phosphorus", "is_correct": false },
-      { "text": "Chlorine", "is_correct": false }
+      {
+        "text": "Sulfur",
+        "is_correct": true
+      },
+      {
+        "text": "Selenium",
+        "is_correct": false
+      },
+      {
+        "text": "Phosphorus",
+        "is_correct": false
+      },
+      {
+        "text": "Chlorine",
+        "is_correct": false
+      }
     ],
     "correct_answer": "Sulfur",
     "hints": [
@@ -181,7 +284,8 @@
       "It is a yellow nonmetal often found near volcanoes.",
       "Its symbol is S."
     ],
-    "explanation": "Sulfur is directly below oxygen in Group 16 of the periodic table."
+    "explanation": "Sulfur is directly below oxygen in Group 16 of the periodic table.",
+    "topic": "science"
   },
   {
     "id": "q019",
@@ -193,10 +297,22 @@
     "question": "Which element has the chemical symbol 'Sn'?",
     "difficulty": "hard",
     "options": [
-      { "text": "Tin", "is_correct": true },
-      { "text": "Sulfur", "is_correct": false },
-      { "text": "Sodium", "is_correct": false },
-      { "text": "Strontium", "is_correct": false }
+      {
+        "text": "Tin",
+        "is_correct": true
+      },
+      {
+        "text": "Sulfur",
+        "is_correct": false
+      },
+      {
+        "text": "Sodium",
+        "is_correct": false
+      },
+      {
+        "text": "Strontium",
+        "is_correct": false
+      }
     ],
     "correct_answer": "Tin",
     "hints": [
@@ -204,7 +320,8 @@
       "It is commonly used in solder and protective coatings.",
       "It is the metal used in tin cans."
     ],
-    "explanation": "Sn comes from Stannum, the Latin name for tin."
+    "explanation": "Sn comes from Stannum, the Latin name for tin.",
+    "topic": "science"
   },
   {
     "id": "q020",
@@ -216,10 +333,22 @@
     "question": "Which element is the primary gas responsible for the green color in chlorine gas demonstrations?",
     "difficulty": "medium",
     "options": [
-      { "text": "Chlorine", "is_correct": true },
-      { "text": "Fluorine", "is_correct": false },
-      { "text": "Nitrogen", "is_correct": false },
-      { "text": "Hydrogen", "is_correct": false }
+      {
+        "text": "Chlorine",
+        "is_correct": true
+      },
+      {
+        "text": "Fluorine",
+        "is_correct": false
+      },
+      {
+        "text": "Nitrogen",
+        "is_correct": false
+      },
+      {
+        "text": "Hydrogen",
+        "is_correct": false
+      }
     ],
     "correct_answer": "Chlorine",
     "hints": [
@@ -227,6 +356,7 @@
       "It is used in water disinfection.",
       "Its symbol is Cl."
     ],
-    "explanation": "Chlorine gas is yellow-green in color and is a halogen commonly used for disinfecting water."
+    "explanation": "Chlorine gas is yellow-green in color and is a halogen commonly used for disinfecting water.",
+    "topic": "science"
   }
 ]
