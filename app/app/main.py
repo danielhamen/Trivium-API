@@ -1,11 +1,27 @@
 from contextlib import asynccontextmanager
 from typing import Annotated
+from pathlib import Path
 
 from fastapi import Depends, FastAPI, HTTPException, Query
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 
 from app.models import Difficulty, Question
 from app.repository import DataRepository
-from app.schemas import CategoryOut, QuestionOut, QuestionPublicOut, StatsOut
+from app.schemas import (
+    AdminAnalyticsOut,
+    CategoryCreateIn,
+    CategoryOut,
+    CategoryUpdateIn,
+    QuestionOut,
+    QuestionPublicOut,
+    QuestionUpdateIn,
+    QuestionUpsertIn,
+    ReportCreateIn,
+    ReportOut,
+    ReportStatusUpdateIn,
+    StatsOut,
+)
 
 repo = DataRepository()
 
@@ -22,6 +38,8 @@ app = FastAPI(
     description="Trivia question and category API",
     lifespan=lifespan,
 )
+static_dir = Path(__file__).resolve().parent / "static"
+app.mount("/admin/static", StaticFiles(directory=static_dir), name="admin-static")
 
 
 def get_repo() -> DataRepository:
@@ -244,3 +262,179 @@ def get_public_question(
             status_code=404, detail=f"question not found: {question_id}"
         )
     return to_public_question(question)
+
+
+@app.get("/admin", response_class=FileResponse)
+def admin_dashboard():
+    return FileResponse(static_dir / "admin.html")
+
+
+@app.get("/admin/api/questions", response_model=list[QuestionOut])
+def admin_list_questions(
+    repository: Annotated[DataRepository, Depends(get_repo)],
+):
+    return repository.get_all_questions()
+
+
+@app.post("/admin/api/questions", response_model=QuestionOut, status_code=201)
+def admin_create_question(
+    payload: QuestionUpsertIn,
+    repository: Annotated[DataRepository, Depends(get_repo)],
+):
+    try:
+        return repository.create_question(
+            id=payload.id,
+            question=payload.question,
+            category_ids=payload.category_ids,
+            difficulty=payload.difficulty,
+            correct_answer=payload.correct_answer,
+            options=[option.model_dump() for option in payload.options],
+            hints=payload.hints,
+            explanation=payload.explanation,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@app.put("/admin/api/questions/{question_id}", response_model=QuestionOut)
+def admin_update_question(
+    question_id: str,
+    payload: QuestionUpdateIn,
+    repository: Annotated[DataRepository, Depends(get_repo)],
+):
+    try:
+        return repository.update_question(
+            question_id=question_id,
+            question=payload.question,
+            category_ids=payload.category_ids,
+            difficulty=payload.difficulty,
+            correct_answer=payload.correct_answer,
+            options=[option.model_dump() for option in payload.options],
+            hints=payload.hints,
+            explanation=payload.explanation,
+            is_active=payload.is_active,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@app.delete("/admin/api/questions/{question_id}", status_code=204)
+def admin_delete_question(
+    question_id: str,
+    repository: Annotated[DataRepository, Depends(get_repo)],
+):
+    try:
+        repository.delete_question(question_id)
+    except ValueError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+
+
+@app.get("/admin/api/categories", response_model=list[CategoryOut])
+def admin_list_categories(
+    repository: Annotated[DataRepository, Depends(get_repo)],
+):
+    return repository.categories
+
+
+@app.post("/admin/api/categories", response_model=CategoryOut, status_code=201)
+def admin_create_category(
+    payload: CategoryCreateIn,
+    repository: Annotated[DataRepository, Depends(get_repo)],
+):
+    try:
+        return repository.create_category(
+            id=payload.id,
+            title=payload.title,
+            description=payload.description,
+            parent_id=payload.parent_id,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@app.put("/admin/api/categories/{category_id}", response_model=CategoryOut)
+def admin_update_category(
+    category_id: str,
+    payload: CategoryUpdateIn,
+    repository: Annotated[DataRepository, Depends(get_repo)],
+):
+    try:
+        return repository.update_category(
+            category_id, title=payload.title, description=payload.description
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+
+
+@app.delete("/admin/api/categories/{category_id}", status_code=204)
+def admin_delete_category(
+    category_id: str,
+    repository: Annotated[DataRepository, Depends(get_repo)],
+):
+    try:
+        repository.delete_category(category_id)
+    except ValueError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+
+
+@app.post("/questions/{question_id}/report", response_model=ReportOut, status_code=201)
+def report_question(
+    question_id: str,
+    payload: ReportCreateIn,
+    repository: Annotated[DataRepository, Depends(get_repo)],
+):
+    try:
+        return repository.create_report(
+            question_id=question_id, reason=payload.reason, notes=payload.notes
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+
+
+@app.get("/admin/api/reports", response_model=list[ReportOut])
+def admin_list_reports(
+    repository: Annotated[DataRepository, Depends(get_repo)],
+):
+    return repository.list_reports()
+
+
+@app.put("/admin/api/reports/{report_id}", response_model=ReportOut)
+def admin_update_report(
+    report_id: str,
+    payload: ReportStatusUpdateIn,
+    repository: Annotated[DataRepository, Depends(get_repo)],
+):
+    if payload.status not in {"open", "resolved", "ignored"}:
+        raise HTTPException(status_code=400, detail="invalid status")
+    try:
+        return repository.update_report_status(report_id=report_id, status=payload.status)
+    except ValueError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+
+
+@app.get("/admin/api/analytics", response_model=AdminAnalyticsOut)
+def admin_analytics(
+    repository: Annotated[DataRepository, Depends(get_repo)],
+):
+    questions = repository.get_all_questions()
+    reports = repository.list_reports()
+    categories = repository.get_all_categories()
+    questions_per_category: dict[str, int] = {c.title: 0 for c in categories}
+    for question in questions:
+        for category in question.categories:
+            questions_per_category[category.title] = (
+                questions_per_category.get(category.title, 0) + 1
+            )
+    by_difficulty = {"easy": 0, "medium": 0, "hard": 0}
+    for question in questions:
+        by_difficulty[question.difficulty.value] += 1
+    return AdminAnalyticsOut(
+        total_questions=len(questions),
+        total_categories=len(categories),
+        active_questions=sum(1 for q in questions if q.is_active),
+        inactive_questions=sum(1 for q in questions if not q.is_active),
+        open_reports=sum(1 for r in reports if r["status"] == "open"),
+        resolved_reports=sum(1 for r in reports if r["status"] == "resolved"),
+        questions_by_difficulty=by_difficulty,
+        questions_per_category=questions_per_category,
+    )

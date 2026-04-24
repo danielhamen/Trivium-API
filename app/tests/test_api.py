@@ -159,3 +159,47 @@ def test_search_questions(client, repository):
     assert response.status_code == 200
     body = response.json()
     assert isinstance(body, list)
+
+
+def test_admin_dashboard_page(client):
+    response = client.get("/admin")
+    assert response.status_code == 200
+    assert "Trivia Admin Dashboard" in response.text
+
+
+def test_create_report_and_resolve(client, repository):
+    question = repository.questions[0]
+    create = client.post(
+        f"/questions/{question.id}/report",
+        json={"reason": "wrong answer", "notes": "looks incorrect"},
+    )
+    assert create.status_code == 201
+    report = create.json()
+    assert report["question_id"] == question.id
+    report_id = report["id"]
+
+    update = client.put(f"/admin/api/reports/{report_id}", json={"status": "resolved"})
+    assert update.status_code == 200
+    assert update.json()["status"] == "resolved"
+
+
+def test_admin_create_and_delete_question(client):
+    categories_response = client.get("/categories", params={"flat": True})
+    category_id = categories_response.json()[0]["id"]
+    payload = {
+        "id": "admin-test-question",
+        "question": "Admin test question?",
+        "category_ids": [category_id],
+        "difficulty": "easy",
+        "correct_answer": "yes",
+        "options": [],
+        "hints": ["hint"],
+        "explanation": "explanation",
+        "is_active": True,
+    }
+    create = client.post("/admin/api/questions", json=payload)
+    assert create.status_code == 201
+    assert create.json()["id"] == payload["id"]
+
+    delete = client.delete(f"/admin/api/questions/{payload['id']}")
+    assert delete.status_code == 204

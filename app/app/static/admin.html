@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trivia Admin Dashboard</title>
+    <link rel="stylesheet" href="/admin/static/admin.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Trivia Admin Dashboard</h1>
+      <p>MVP admin for categories, questions, reports, and analytics.</p>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2>Analytics</h2>
+        <div id="analytics" class="stats-grid"></div>
+        <pre id="analytics-json"></pre>
+      </section>
+
+      <section class="card two-col">
+        <div>
+          <h2>Categories</h2>
+          <form id="category-form">
+            <input name="id" placeholder="Category ID" required />
+            <input name="title" placeholder="Title" required />
+            <input name="description" placeholder="Description" />
+            <input name="parent_id" placeholder="Parent ID (optional)" />
+            <button type="submit">Add Category</button>
+          </form>
+          <ul id="category-list"></ul>
+        </div>
+
+        <div>
+          <h2>Questions</h2>
+          <form id="question-form">
+            <input name="id" placeholder="Question ID" required />
+            <textarea name="question" placeholder="Question text" required></textarea>
+            <input name="category_ids" placeholder="Category IDs (comma separated)" required />
+            <select name="difficulty" required>
+              <option value="easy">easy</option>
+              <option value="medium">medium</option>
+              <option value="hard">hard</option>
+            </select>
+            <input name="correct_answer" placeholder="Correct answer" required />
+            <input name="explanation" placeholder="Explanation" />
+            <input name="hints" placeholder="Hints (comma separated)" />
+            <button type="submit">Add Question</button>
+          </form>
+          <ul id="question-list"></ul>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Question Reports</h2>
+        <p>Users can submit reports via <code>POST /questions/{question_id}/report</code>.</p>
+        <ul id="report-list"></ul>
+      </section>
+    </main>
+
+    <template id="status-buttons-template">
+      <button data-status="open">Open</button>
+      <button data-status="resolved">Resolve</button>
+      <button data-status="ignored">Ignore</button>
+    </template>
+
+    <script src="/admin/static/admin.js"></script>
+  </body>
+</html>
